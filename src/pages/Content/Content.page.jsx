@@ -4,12 +4,14 @@ import Mock from "../../utils/youtube-videos-mock.json"
 import styled from 'styled-components';
 
 function Content() {
+
+    
     console.log(Mock.items)
     return (
         <StyledCard>
             {Mock.items.map((video) =>(
                 <Card image={video.snippet.thumbnails.high.url}
-                key={video.etag}
+                key={video.id.videoId}
                 title={video.snippet.title}
                 description={video.snippet.description}
                 />
@@ -27,6 +29,6 @@ const StyledCard = styled.div`
     height:90vh;
     justify-content:space-around;
     padding: 1rem 2rem;
-    margin-top:20px;
+    margin-top:65px;
 `;
 export default Content;

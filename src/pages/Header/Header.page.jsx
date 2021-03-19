@@ -60,12 +60,12 @@ function Header() {
 
 const StyledHeader = styled.header`
   position: fixed;
-  top: 0;
+  top:0;
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-around;
-  min-height: 50px;
+  height: 60px;
   background: #384d5f;
   align-items: center;
   z-index: 100;
