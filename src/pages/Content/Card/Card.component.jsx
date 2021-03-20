@@ -4,13 +4,13 @@ import styled from "styled-components";
 function Card({ image, title, description }) {
   
   return (
-    <StyledCard>
-      <div className="video-image">
-        <img src={image} alt="" />
+    <StyledCard data-testid="card_div">
+      <div  className="video-image">
+        <img data-testid="card_img" src={image} alt="" />
       </div>
       <div className="video-content">
-        <h2>{title.replace(/&#39;/, "'")}</h2>
-        <p>{description}</p>
+        <h2 data-testid="card_h2">{title.replace(/&#39;/, "'")}</h2>
+        <p data-testid="card_p">{description}</p>
       </div>
     </StyledCard>
   );
@@ -25,7 +25,7 @@ const StyledCard = styled.div`
   position: relative;
   border: 2px solid #c4c2c2;
   border-radius: 5px;
-  margin: 10px 0px;
+  margin: 10px auto;
 
   .video-image {
     height: 150px;

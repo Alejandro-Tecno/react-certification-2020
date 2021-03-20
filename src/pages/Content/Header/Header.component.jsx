@@ -23,7 +23,7 @@ function Header() {
   return (
     <StyledHeader>
       <div>
-        <button className="nav-selector">
+        <button className="nav-selector" data-testid="nav_selector">
           <DehazeIcon />
         </button>
       </div>
@@ -37,7 +37,7 @@ function Header() {
         <div className="dark-mode-selector">
           <FormControlLabel
             control={
-              <Switch
+              <Switch data-testid="switch_dm"
                 checked={darkMode}
                 onChange={handleChange}
                 name="darkMode"

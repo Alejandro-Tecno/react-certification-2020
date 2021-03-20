@@ -1,10 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Layout from '../Layout';
-import Header from '../../pages/Header'
-import Content from "../../pages/Content/Content.page";
 import NotFound from '../../pages/NotFound';
-
+import Homepage from "../../pages/Homepage"
 function App() {
   
 
@@ -13,8 +11,7 @@ function App() {
           <Layout>
             <Switch>
               <Route exact path="/">
-                <Header />
-                <Content /> 
+              <Homepage />
               </Route>
               <Route path="*">
                 <NotFound />

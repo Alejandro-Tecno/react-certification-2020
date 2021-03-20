@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card creator Renders correctly 1`] = `
+<div
+  className="sc-bdfBwQ huBAJV"
+  data-testid="card_div"
+>
+  <div
+    className="video-image"
+  >
+    <img
+      alt=""
+      data-testid="card_img"
+      src="https://i.ytimg.com/vi/zClI9OjgKXM/hqdefault.jpg"
+    />
+  </div>
+  <div
+    className="video-content"
+  >
+    <h2
+      data-testid="card_h2"
+    >
+      Video'1
+    </h2>
+    <p
+      data-testid="card_p"
+    >
+      testDescription
+    </p>
+  </div>
+</div>
+`;
