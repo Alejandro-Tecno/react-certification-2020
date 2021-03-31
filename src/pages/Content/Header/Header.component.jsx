@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FormControlLabel, Switch } from "@material-ui/core";
 import styled from "styled-components";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import SearchIcon from "@material-ui/icons/Search";
+import useFetch from "../../../components/Hooks/useFetch";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../../utils/UserContext";
+import SearchBar from "./SearchBar/SearchBar";
 
-function Header() {
+function Header({ searchTest, setSearchTest }) {
   /* const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
@@ -27,17 +31,16 @@ function Header() {
           <DehazeIcon />
         </button>
       </div>
-      <form action="">
-        <input type="text" placeholder="Search" />
-        <button className="search-button">
-          <SearchIcon />
-        </button>
-      </form>
+      <Link to={`/`}>
+        <h2>Home</h2>
+      </Link>
+      <SearchBar />
       <StyledRigth>
         <div className="dark-mode-selector">
           <FormControlLabel
             control={
-              <Switch data-testid="switch_dm"
+              <Switch
+                data-testid="switch_dm"
                 checked={darkMode}
                 onChange={handleChange}
                 name="darkMode"
@@ -60,7 +63,7 @@ function Header() {
 
 const StyledHeader = styled.header`
   position: fixed;
-  top:0;
+  top: 0;
   display: flex;
   flex-direction: row;
   width: 100%;

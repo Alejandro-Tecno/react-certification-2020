@@ -1,14 +1,13 @@
-import React from 'react'
-import Header from '../../pages/Content/Header'
+import React from "react";
+
 import Content from "../../pages/Content/CardList";
 
 function Homepage() {
-    return (
-        <div>
-            <Header />
-                <Content /> 
-        </div>
-    )
+  return (
+    <div>
+      <Content />
+    </div>
+  );
 }
 
-export default Homepage
+export default Homepage;

@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 function Card({ image, title, description }) {
-  
   return (
     <StyledCard data-testid="card_div">
-      <div  className="video-image">
+      <div className="video-image">
         <img data-testid="card_img" src={image} alt="" />
       </div>
       <div className="video-content">
-        <h2 data-testid="card_h2">{title.replace(/&#39;/, "'")}</h2>
+        <h2 data-testid="card_h2">
+          {title.replace(/&#39;/, "'").replace(/&amp;/, "&")}
+        </h2>
         <p data-testid="card_p">{description}</p>
       </div>
     </StyledCard>
@@ -23,12 +24,12 @@ const StyledCard = styled.div`
   align-items: center;
   background: #ffffff;
   position: relative;
-  border: 2px solid #c4c2c2;
+  border: 1px solid #e7e5e5;
   border-radius: 5px;
   margin: 10px auto;
 
   .video-image {
-    height: 150px;
+    height: 190px;
     width: 350px;
     border-radius: 5px 5px 0px 0px;
     background-size: cover;
