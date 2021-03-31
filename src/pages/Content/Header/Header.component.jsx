@@ -32,7 +32,7 @@ function Header({ searchTest, setSearchTest }) {
         </button>
       </div>
       <Link to={`/`}>
-        <h2>Home</h2>
+        <h2>Homes</h2>
       </Link>
       <SearchBar />
       <StyledRigth>
