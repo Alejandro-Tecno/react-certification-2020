@@ -1,31 +1,37 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../../../../utils/UserContext";
 
 function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState();
-  const { value, setValue } = useContext(UserContext);
+  const { searchTerm, setSearchTerm } = useContext(UserContext);
+  const [inputValue, setInputValue] = useState(searchTerm);
 
   const handleInput = (e) => {
-    setSearchTerm(e.target.value);
-    console.log(`Search term in input is ${searchTerm}`);
+    setInputValue(e.target.value);
+    console.log(inputValue);
   };
 
-  function search(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setValue(searchTerm);
-    console.log(`value after search is ${value}`);
-  }
+    setSearchTerm(inputValue);
+    console.log(searchTerm);
+  };
+
   return (
-    <StyledForm action="" onSubmit={search}>
-      <input type="text" placeholder="Search" onChange={handleInput} />
-      <Link to={`/search/${searchTerm}`}>
-        <button className="search-button">
-          <SearchIcon />
-        </button>
-      </Link>
+    <StyledForm action="" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Search"
+        value={inputValue}
+        onChange={handleInput}
+      />
+      {/* <Link to={`/search/${searchTerm}`}> */}
+      <button className="search-button">
+        <SearchIcon />
+      </button>
+      {/* </Link> */}
     </StyledForm>
   );
 }

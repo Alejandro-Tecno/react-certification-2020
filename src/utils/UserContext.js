@@ -5,4 +5,6 @@ const UserContext = createContext({
   setSearchTerm: () => {},
 });
 
+/* const UserContext = createContext(); */
+
 export default UserContext;

@@ -1,11 +1,11 @@
 import React from "react";
 
-import Content from "../../pages/Content/CardList";
+import Cardlist from "../../pages/Content/CardList";
 
 function Homepage() {
   return (
     <div>
-      <Content />
+      <Cardlist />
     </div>
   );
 }

@@ -9,13 +9,12 @@ import SearchPage from "../../pages/SearchPage";
 import UserContext from "../../utils/UserContext";
 
 function App() {
-  const [searchTest, setSearchTest] = useState();
-  const [value, setValue] = useState("elmo");
+  const [searchTerm, setSearchTerm] = useState("elmo");
 
   return (
     <BrowserRouter>
       <Layout>
-        <UserContext.Provider value={{ value, setValue }}>
+        <UserContext.Provider value={{ searchTerm, setSearchTerm }}>
           <Header />
           <Switch>
             <Route exact path="/">

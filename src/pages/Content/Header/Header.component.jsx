@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../../utils/UserContext";
 import SearchBar from "./SearchBar/SearchBar";
 
-function Header({ searchTest, setSearchTest }) {
+function Header() {
   /* const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Card from "../Card/";
-//import Mock from "../../../utils/youtube-videos-mock.json";
 import styled from "styled-components";
 import useFetch from "../../../components/Hooks/useFetch";
 import UserContext from "../../../utils/UserContext";
@@ -8,8 +7,8 @@ import UserContext from "../../../utils/UserContext";
 //https://www.googleapis.com/youtube/v3/search?key=AIzaSyAh804wIQFPN1dUELPIsYhULO5vU--W4_w&channelId=UCyRhIGDUKdIOw07Pd8pHxCw&part=snippet,id&order=date&maxResults=1
 
 function CardList() {
-  const { value, setValue } = useContext(UserContext);
-  const data = useFetch(value);
+  const { searchTerm } = useContext(UserContext);
+  const data = useFetch(searchTerm);
   /*  const [data, setData] = useState(null);
   const [search, setSearch] = useState("elmo");
   const KEY = "AIzaSyAl-W9fExq-7Jn3lSj9ZxMcbME9w6tTWrY";
