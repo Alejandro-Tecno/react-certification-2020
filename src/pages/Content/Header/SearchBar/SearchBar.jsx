@@ -1,37 +1,36 @@
 import React, { useState, useContext } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../../../../utils/UserContext";
+import { useHistory } from "react-router-dom";
 
 function SearchBar() {
   const { searchTerm, setSearchTerm } = useContext(UserContext);
   const [inputValue, setInputValue] = useState(searchTerm);
-
+  let history = useHistory();
   const handleInput = (e) => {
     setInputValue(e.target.value);
-    console.log(inputValue);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTerm(inputValue);
     console.log(searchTerm);
+    history.push(`/search/${searchTerm}`);
   };
 
   return (
-    <StyledForm action="" onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Search"
         value={inputValue}
         onChange={handleInput}
       />
-      {/* <Link to={`/search/${searchTerm}`}> */}
-      <button className="search-button">
+
+      <button className="search-button" type="submit">
         <SearchIcon />
       </button>
-      {/* </Link> */}
     </StyledForm>
   );
 }

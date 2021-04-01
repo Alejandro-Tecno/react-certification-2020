@@ -4,16 +4,14 @@ import Card from "../Content/Card";
 import styled from "styled-components";
 import UserContext from "../../utils/UserContext";
 import SearchResults from "../Content/SearchResults/SearchResults";
+require("dotenv").config();
 
 function SearchPage() {
   const { searchTerm } = useContext(UserContext);
-  //const data = useFetch(searchTerm);
+  const data = useFetch(searchTerm);
 
-  //test
-
-  const [data, setData] = useState(null);
-  const KEY = "AIzaSyAl-W9fExq-7Jn3lSj9ZxMcbME9w6tTWrY";
-  const KEY2 = "AIzaSyAh804wIQFPN1dUELPIsYhULO5vU--W4_w";
+  /*  const [data, setData] = useState(null);
+  const KEY = process.env.REACT_APP_API_KEY;
   const URL = "https://www.googleapis.com/youtube/v3/search?key=";
 
   useEffect(() => {
@@ -29,13 +27,14 @@ function SearchPage() {
     )
       .then((response) => response.json())
       .then((receivedData) => setData(receivedData));
-  };
+  }; */
   //test
 
   return (
     <div>
       {/*  {data ? <SearchResults data={data} /> : <h2>Wrong</h2>} */}
       <StyledCard>
+        <h2>Search page</h2>
         {data ? (
           data.items
             .filter((video) => video.id.kind === "youtube#video")
@@ -44,6 +43,7 @@ function SearchPage() {
                 data-testid="card_div"
                 image={video.snippet.thumbnails.high.url}
                 key={video.id.videoId}
+                id={video.id.videoId}
                 title={video.snippet.title}
                 description={video.snippet.description}
               />

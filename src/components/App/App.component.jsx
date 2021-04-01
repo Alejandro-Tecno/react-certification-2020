@@ -4,13 +4,13 @@ import Layout from "../Layout";
 import NotFound from "../../pages/NotFound";
 import Homepage from "../../pages/Homepage";
 import Header from "../../pages/Content/Header";
-import useFetch from "../Hooks/useFetch";
 import SearchPage from "../../pages/SearchPage";
 import UserContext from "../../utils/UserContext";
+import Video from "../../pages/Content/Video";
+require("dotenv").config();
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("elmo");
-
   return (
     <BrowserRouter>
       <Layout>
@@ -22,6 +22,9 @@ function App() {
             </Route>
             <Route path="/search/:searchTerm">
               <SearchPage />
+            </Route>
+            <Route path="/video/:id">
+              <Video />
             </Route>
             <Route path="*">
               <NotFound />

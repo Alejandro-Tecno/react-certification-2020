@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Cardlist from "../../pages/Content/CardList";
 
-function Homepage() {
+function SearchPage2() {
   return (
     <StyledMain>
-      <h2 className="recomended-text">Recommended videos</h2>
+      <h2 className="recomended-text">Search results</h2>
       <Cardlist />
     </StyledMain>
   );
@@ -21,4 +21,4 @@ const StyledMain = styled.div`
   }
 `;
 
-export default Homepage;
+export default SearchPage2;

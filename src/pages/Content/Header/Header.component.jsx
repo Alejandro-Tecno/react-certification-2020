@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { FormControlLabel, Switch } from "@material-ui/core";
 import styled from "styled-components";
 import DehazeIcon from "@material-ui/icons/Dehaze";
+import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import useFetch from "../../../components/Hooks/useFetch";
 import { Link } from "react-router-dom";
@@ -32,7 +33,9 @@ function Header() {
         </button>
       </div>
       <Link to={`/`}>
-        <h2>Homes</h2>
+        <button className="home-selector">
+          <HomeIcon />
+        </button>
       </Link>
       <SearchBar />
       <StyledRigth>
@@ -62,7 +65,7 @@ function Header() {
 }
 
 const StyledHeader = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   display: flex;
   flex-direction: row;
@@ -79,7 +82,8 @@ const StyledHeader = styled.header`
     border: none;
   }
 
-  .nav-selector {
+  .nav-selector,
+  .home-selector {
     align-items: flex-start;
     background: none;
     border-radius: 10px;

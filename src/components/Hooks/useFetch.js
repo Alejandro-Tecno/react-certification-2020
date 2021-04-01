@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
+require("dotenv").config();
 
 function useFetch(initialTerm) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  /* const [search, setSearch] = useState(initialTerm); */
-  const KEY2 = "AIzaSyAl-W9fExq-7Jn3lSj9ZxMcbME9w6tTWrY";
-  const KEY = "AIzaSyAh804wIQFPN1dUELPIsYhULO5vU--W4_w";
+  const KEY = process.env.REACT_APP_API_KEY3;
   const URL = "https://www.googleapis.com/youtube/v3/search?key=";
 
-  //https://www.googleapis.com/youtube/v3/search?key=AIzaSyAh804wIQFPN1dUELPIsYhULO5vU--W4_w&part=snippet,id&order=viewCount&q=searchTest&type=video&maxResults=20
   useEffect(() => {
     if (!initialTerm) return;
     setLoading(true);
