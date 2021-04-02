@@ -16,10 +16,10 @@ function useFetch(initialTerm) {
 
   const loadData = async () => {
     console.log(
-      `${URL}${KEY}&part=snippet,id&order=viewCount&q=${initialTerm}&type=video&maxResults=20`
+      `${URL}${KEY}&part=snippet,id&order=viewCount&q=${initialTerm}&type=video&maxResults=5`
     );
     await fetch(
-      `${URL}${KEY}&part=snippet,id&order=viewCount&q=${initialTerm}&type=video&maxResults=20`
+      `${URL}${KEY}&part=snippet,id&order=viewCount&q=${initialTerm}&type=video&maxResults=5`
     )
       .then((response) => response.json())
       .then((receivedData) => {

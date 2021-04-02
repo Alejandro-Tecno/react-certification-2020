@@ -1,27 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
-import { FormControlLabel, Switch } from "@material-ui/core";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import HomeIcon from "@material-ui/icons/Home";
-import SearchIcon from "@material-ui/icons/Search";
-import useFetch from "../../../components/Hooks/useFetch";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../../utils/UserContext";
 import SearchBar from "./SearchBar/SearchBar";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
 function Header() {
-  /* const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  }; */
-
   const [darkMode, setDarkMode] = useState(false);
 
-  const handleChange = (e) => {
+  const handleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
@@ -39,20 +28,12 @@ function Header() {
       </Link>
       <SearchBar />
       <StyledRigth>
-        <div className="dark-mode-selector">
-          <FormControlLabel
-            control={
-              <Switch
-                data-testid="switch_dm"
-                checked={darkMode}
-                onChange={handleChange}
-                name="darkMode"
-                color="secondary"
-              />
-            }
-            label="Dark&nbsp;mode"
-          />
-        </div>
+        <StyledDarkModeSelector
+          data-testid="darkModeButton"
+          onClick={handleDarkMode}
+        >
+          {darkMode ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
+        </StyledDarkModeSelector>
         <div className="user">
           <img
             alt="user"
@@ -78,10 +59,13 @@ const StyledHeader = styled.header`
   -webkit-box-shadow: 1px 0px 7px 5px rgba(194, 194, 194, 1);
   -moz-box-shadow: 1px 0px 7px 5px rgba(194, 194, 194, 1);
   box-shadow: 1px 0px 7px 5px rgba(194, 194, 194, 1);
-  button:focus {
-    border: none;
+  button {
+    margin: 0px 10px;
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
-
   .nav-selector,
   .home-selector {
     align-items: flex-start;
@@ -102,6 +86,18 @@ const StyledHeader = styled.header`
     flex: 1;
     max-width: 28vw;
     margin-left: 2rem;
+    transition: all 0.6s ease-in-out;
+    &:focus {
+      max-width: 40vw;
+    }
+    &:hover {
+      max-width: 40vw;
+      input {
+        background: #cddff0;
+        width: 38vw;
+      }
+    }
+
     input {
       border: none;
       background: #bad7ee;
@@ -113,16 +109,10 @@ const StyledHeader = styled.header`
       font-size: 1rem;
       &:focus {
         border: none;
-      }
-      &:hover {
         background: #cddff0;
+        width: 38vw;
       }
     }
-  }
-  button {
-    background: none;
-    color: white;
-    border: none;
   }
 `;
 
@@ -132,6 +122,7 @@ const StyledRigth = styled.div`
   justify-content: flex-end;
   flex: 1;
   margin-right: 1rem;
+  font-size: 1.5rem !important;
   span {
     font-size: 0.7rem;
     color: white;
@@ -143,10 +134,18 @@ const StyledRigth = styled.div`
   img {
     border-radius: 50%;
     height: 40px;
+    margin-right: 1rem;
   }
   img:hover {
     border: 2px solid #bebebe;
   }
+`;
+
+const StyledDarkModeSelector = styled.button`
+  margin-right: 15px;
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
 `;
 
 export default Header;

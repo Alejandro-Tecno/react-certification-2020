@@ -16,11 +16,11 @@ function SearchBar() {
     e.preventDefault();
     setSearchTerm(inputValue);
     console.log(searchTerm);
-    history.push(`/search/${searchTerm}`);
+    history.push(`/search/${inputValue}`);
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit} data-testid="form">
       <input
         type="text"
         placeholder="Search"
