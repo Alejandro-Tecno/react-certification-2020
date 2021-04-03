@@ -11,10 +11,13 @@ require("dotenv").config();
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("elmo");
+
   return (
     <BrowserRouter>
       <Layout>
-        <UserContext.Provider value={{ searchTerm, setSearchTerm }}>
+        <UserContext.Provider
+          value={{ searchTerm, setSearchTerm }}
+        >
           <Header />
           <Switch>
             <Route exact path="/">

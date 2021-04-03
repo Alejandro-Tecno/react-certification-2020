@@ -5,6 +5,7 @@ import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import breakpoint from "../../../utils/breakpoints";
 import { InsertChartOutlinedSharp } from "@material-ui/icons";
 
+
 require("dotenv").config();
 
 function Video() {
@@ -26,9 +27,7 @@ function Video() {
   }, [videoId]);
 
   const loadData = async () => {
-    console.log(
-      `Own data video URL: ${URL}videos?part=id%2C+snippet&id=${videoId}&key=${KEY}`
-    );
+ 
     await fetch(`${URL}videos?part=id%2C+snippet&id=${videoId}&key=${KEY}`)
       .then((response) => response.json())
       .then((receivedData) => {
@@ -40,11 +39,9 @@ function Video() {
   };
 
   const loadRelatedVideos = async () => {
-    console.log(
-      `related videos URL: ${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=5`
-    );
+   
     await fetch(
-      `${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=7`
+      `${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=12`
     )
       .then((response) => response.json())
       .then((receivedData) => {

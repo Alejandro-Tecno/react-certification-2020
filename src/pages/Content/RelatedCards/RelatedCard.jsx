@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import breakpoint from "../../../utils/breakpoints";
 
+
 function RelatedCard({ image, title, id }) {
+
+
   return (
-    <StyledLink to={`/video/${id}`}>
-      <StyledCard data-testid="card_div">
+    <StyledLink to={`/video/${id}`} >
+      <StyledCard data-testid="Relatedcard_div">
         <div className="video-image">
           <img data-testid="card_img" src={image} alt="" />
         </div>
         <div className="video-content">
-          <p data-testid="card_h3">
+          <p data-testid="card_title">
             {title.replace(/&#39;/, "'").replace(/&amp;/, "&")}
           </p>
         </div>

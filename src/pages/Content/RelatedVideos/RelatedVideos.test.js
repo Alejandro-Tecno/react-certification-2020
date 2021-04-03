@@ -155,7 +155,7 @@ describe("Video", () => {
   });
 
   it("Renders titles correctly", () => {
-    expect(screen.getByText(/Sesame/iw)).toBeInTheDocument();
+    expect(screen.getByText(/Sesame/i)).toBeInTheDocument();
   });
 
   it("contains the Related videos text", () => {

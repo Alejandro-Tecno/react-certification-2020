@@ -15,7 +15,6 @@ function SearchBar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTerm(inputValue);
-    console.log(searchTerm);
     history.push(`/search/${inputValue}`);
   };
 

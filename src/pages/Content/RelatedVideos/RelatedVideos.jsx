@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import RelatedCard from "../RelatedCards";
 import breakpoint from "../../../utils/breakpoints";

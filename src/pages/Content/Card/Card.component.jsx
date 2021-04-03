@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
 function Card({ image, title, description, id }) {
+  
   return (
     <StyledLink to={`/video/${id}`}>
       <StyledCard data-testid="card_div">

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RelatedCard creator Renders correctly 1`] = `
+<a
+  className="sc-bdfBwQ kvZPMd"
+  href="/video/123"
+  onClick={[Function]}
+>
+  <div
+    className="sc-gsTCUz kYQnbI"
+    data-testid="Relatedcard_div"
+  >
+    <div
+      className="video-image"
+    >
+      <img
+        alt=""
+        data-testid="card_img"
+        src="https://test-image.jpg"
+      />
+    </div>
+    <div
+      className="video-content"
+    >
+      <p
+        data-testid="card_title"
+      >
+        testVideo
+      </p>
+    </div>
+  </div>
+</a>
+`;
