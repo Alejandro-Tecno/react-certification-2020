@@ -22,6 +22,7 @@ function SearchBar() {
   return (
     <StyledForm onSubmit={handleSubmit} data-testid="form">
       <input
+        data-testid="input"
         type="text"
         placeholder="Search"
         value={inputValue}

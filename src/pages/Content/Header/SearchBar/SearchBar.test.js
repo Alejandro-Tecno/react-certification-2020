@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import SearchBar from "./";
 import "@testing-library/jest-dom/extend-expect";
-import { Route, withRouter } from "react-router-dom";
 
 describe("Header", () => {
+  const contextValue = "elmo";
   beforeEach(() => render(<SearchBar />));
 
   it("Contains the input", () => {
@@ -19,6 +19,7 @@ describe("Header", () => {
     });
     expect(screen.getByRole("textbox").value).toContain("test");
   });
+
   /*   it("Calls the handleSubmit function", () => {
     const handleSubmit = jest.fn();
     fireEvent.submit(screen.getByRole("textbox"));

@@ -6,11 +6,13 @@ import breakpoint from "../../../utils/breakpoints";
 function RelatedVideos({ relatedData }) {
   return (
     <StyledRelatedVideos>
+      <h2>Related videos</h2>
       {relatedData ? (
         relatedData.items
           .slice(2)
           .map((video) => (
             <RelatedCard
+              data-testid="RelatedCard"
               image={video.snippet.thumbnails.high.url}
               key={video.id.videoId}
               id={video.id.videoId}
