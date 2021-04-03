@@ -11,23 +11,23 @@ function useFetch(initialTerm) {
   useEffect(() => {
     if (!initialTerm) return;
     setLoading(true);
+    const loadData = async () => {
+      await fetch(
+        `${URL}${KEY}&part=snippet,id&order=viewCount&q=${initialTerm}&type=video&maxResults=20`
+      )
+        .then((response) => response.json())
+        .then((receivedData) => {
+          setLoading(false);
+          setData(receivedData);
+        })
+        .catch((error) => {
+          setLoading(false);
+          setError(error);
+        });
+    };
     loadData();
   }, [initialTerm]);
 
-  const loadData = async () => {
-    await fetch(
-      `${URL}${KEY}&part=snippet,id&order=viewCount&q=${initialTerm}&type=video&maxResults=20`
-    )
-      .then((response) => response.json())
-      .then((receivedData) => {
-        setLoading(false);
-        setData(receivedData);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
-      });
-  };
   return data;
 }
 

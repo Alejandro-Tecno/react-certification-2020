@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import breakpoint from "../../../utils/breakpoints";
-import { InsertChartOutlinedSharp } from "@material-ui/icons";
-
 
 require("dotenv").config();
 
@@ -22,37 +20,36 @@ function Video() {
   useEffect(() => {
     if (!videoId) return;
     setLoaded(false);
-    loadRelatedVideos();
+    
+
+    const loadData = async () => {
+      await fetch(`${URL}videos?part=id%2C+snippet&id=${videoId}&key=${KEY}`)
+        .then((response) => response.json())
+        .then((receivedData) => {
+          setData(receivedData);
+        })
+        .catch((error) => {
+          setError(error);
+        });
+    };
+    const loadRelatedVideos = async () => {
+      await fetch(
+        `${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=12`
+      )
+        .then((response) => response.json())
+        .then((receivedData) => {
+          setRelatedData(receivedData);
+          setLoaded(true);
+        })
+        .catch((error) => {
+          setError(error);
+          setLoaded(true);
+        });
+    };
     loadData();
+    loadRelatedVideos();
   }, [videoId]);
 
-  const loadData = async () => {
- 
-    await fetch(`${URL}videos?part=id%2C+snippet&id=${videoId}&key=${KEY}`)
-      .then((response) => response.json())
-      .then((receivedData) => {
-        setData(receivedData);
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  };
-
-  const loadRelatedVideos = async () => {
-   
-    await fetch(
-      `${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=12`
-    )
-      .then((response) => response.json())
-      .then((receivedData) => {
-        setRelatedData(receivedData);
-        setLoaded(true);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoaded(true);
-      });
-  };
   //fectch
 
   return (
