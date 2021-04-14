@@ -3,8 +3,8 @@ import { createContext } from "react";
 const UserContext = createContext({
   searchTerm: "",
   setSearchTerm: () => {},
+  darkTheme: false,
+  setDarkTheme: () => {},
 });
-
-/* const UserContext = createContext(); */
 
 export default UserContext;

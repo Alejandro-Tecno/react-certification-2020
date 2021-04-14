@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import RelatedCard from "../RelatedCards";
-import breakpoint from "../../../utils/breakpoints";
+import device from "../../../utils/breakpoints";
 
 function RelatedVideos({ relatedData }) {
+  console.log(relatedData.items.slice(2));
+
   return (
     <StyledRelatedVideos>
       <h2>Related videos</h2>
       {relatedData ? (
         relatedData.items
-          .slice(2)
+          /* .slice(2) */
+          .filter((item) => item.snippet !== undefined)
           .map((video) => (
             <RelatedCard
               data-testid="RelatedCard"
@@ -35,7 +38,7 @@ const StyledRelatedVideos = styled.div`
   align-items: flex-start;
   flex: 0.4;
 
-  @media ${breakpoint.device.sm} {
+  @media ${device.sm} {
     margin-top: 10px;
     display: flex;
     flex-direction: row;

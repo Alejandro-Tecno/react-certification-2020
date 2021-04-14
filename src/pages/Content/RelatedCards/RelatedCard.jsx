@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import breakpoint from "../../../utils/breakpoints";
-
+import device from "../../../utils/breakpoints";
 
 function RelatedCard({ image, title, id }) {
-
-
   return (
-    <StyledLink to={`/video/${id}`} >
+    <StyledLink to={`/video/${id}`}>
       <StyledCard data-testid="Relatedcard_div">
         <div className="video-image">
           <img data-testid="card_img" src={image} alt="" />
@@ -45,7 +42,7 @@ const StyledCard = styled.div`
   overflow: hidden;
   width: 100%;
   align-items: center;
-  background: #ffffff;
+  /* background: #ffffff; */
   position: relative;
   border: 1px solid #e7e5e5;
   border-radius: 5px;
@@ -81,7 +78,7 @@ const StyledCard = styled.div`
     p {
       font-size: 1.1rem;
       text-decoration: none;
-      color: black;
+      /*  color: black; */
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 1px;
@@ -94,40 +91,16 @@ const StyledCard = styled.div`
       -webkit-box-orient: vertical;
     }
   }
-  @media ${breakpoint.device.sm} {
+  @media ${device.sm} {
     display: flex;
     flex-direction: row;
     /* max-width: 40vw; */
   }
-  @media ${breakpoint.device.xs} {
+  @media ${device.xs} {
     display: flex;
     flex-direction: row;
     width: 80vw;
   }
-  /*  @media ${breakpoint.device.sm} {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    max-width: 300px;
-    align-items: center;
-
-    .video-image {
-      height: 110px;
-      width: 100%;
-    }
-    .video-content {
-      padding: 0.2rem 0.1rem;
-      width: 95%;
-      h3 {
-        font-size: 1rem;
-        max-height: 4rem;
-      }
-      p {
-        width: 95%;
-        max-height: 65px;
-      }
-    }
-  } */
 `;
 
 export default RelatedCard;
