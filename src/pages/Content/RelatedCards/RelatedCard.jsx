@@ -24,7 +24,9 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   margin: 5px 12px;
   max-height: 18vh;
-  width: 95%;
+  width: 98%;
+  display: flex;
+  justify-content: center;
 
   &:focus,
   &:hover,
@@ -44,7 +46,7 @@ const StyledCard = styled.div`
   align-items: center;
   /* background: #ffffff; */
   position: relative;
-  border: 1px solid #e7e5e5;
+  border: 1px solid #474747;
   border-radius: 5px;
   margin: 1px 5px;
   text-decoration: none;

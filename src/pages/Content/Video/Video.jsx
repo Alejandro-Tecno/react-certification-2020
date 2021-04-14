@@ -112,6 +112,7 @@ const StyledVideoDetails = styled.div`
   -webkit-box-orient: vertical;
   h3 {
     margin: 6px 1px;
+    font-size: 1.5em;
   }
   /* @media (max-width: 768px) {
     p {
@@ -122,6 +123,7 @@ const StyledVideoDetails = styled.div`
 `;
 const StyledVideo = styled.iframe`
   width: 100%;
+  border: 1px solid #302f2f;
   height: 50vh;
   @media (min-width: 768px) {
     height: 450px;
@@ -146,6 +148,7 @@ const StyledVideoContainer = styled.div`
   padding: 1rem 2rem;
   overflow: hidden;
   overflow-y: hidden;
+  border: 1px solid #302f2f;
   @media ${device.sm} {
     width: 100%;
     margin-right: 10px;

@@ -37,13 +37,16 @@ const StyledRelatedVideos = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex: 0.4;
+  h2 {
+    margin-left: 1rem;
+  }
 
   @media ${device.sm} {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     justify-content: space-around;
   }

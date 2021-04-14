@@ -6,7 +6,7 @@ export const Themes = {
   },
   dark: {
     font: "#fff",
-    background: "#000",
+    background: "#18181b",
     headerColor: "#32383d",
   },
 };

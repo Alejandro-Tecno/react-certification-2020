@@ -44,6 +44,9 @@ const StyledForm = styled.form`
   flex: 1;
   max-width: 28vw;
   margin-left: 2rem;
+  @media (max-width: 500px) {
+    margin-left: 5px !important;
+  }
   input {
     border: none;
     background: #bad7ee;

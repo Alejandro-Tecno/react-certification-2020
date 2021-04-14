@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import UserContext from "../../utils/UserContext";
 import { ThemeContext } from "../../utils/GlobalStateProvider";
 import { Themes } from "../../utils/themes";
 
 function Layout({ children }) {
-  const { state, dispatch } = useContext(ThemeContext);
+  const { state } = useContext(ThemeContext);
 
   const StyledContainer = styled.main`
     width: 100vw;

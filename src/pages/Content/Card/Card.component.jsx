@@ -39,7 +39,7 @@ const StyledCard = styled.div`
   align-items: center;
   /* background: #ffffff; */
   position: relative;
-  border: 1px solid #e7e5e5;
+  border: 1px solid #3a3a53;
   border-radius: 5px;
   margin: 10px 10px;
   text-decoration: none;
@@ -60,11 +60,13 @@ const StyledCard = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
+
     img {
       display: block;
       width: 100%;
       height: auto;
       object-fit: cover;
+      border-radius: 5px 5px 0px 0px;
     }
   }
   .video-content {
