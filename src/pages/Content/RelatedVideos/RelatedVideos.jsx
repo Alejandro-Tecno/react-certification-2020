@@ -4,8 +4,6 @@ import RelatedCard from "../RelatedCards";
 import device from "../../../utils/breakpoints";
 
 function RelatedVideos({ relatedData }) {
-  console.log(relatedData.items.slice(2));
-
   return (
     <StyledRelatedVideos>
       <h2>Related videos</h2>

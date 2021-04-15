@@ -51,9 +51,6 @@ function Video() {
     loadRelatedVideos();
   }, [videoId, KEY]);
 
-  console.log(
-    `${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=12`
-  );
   //fectch
 
   return (

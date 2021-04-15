@@ -1,7 +1,8 @@
-import { createContext,  useReducer } from "react";
+import React from "react";
+import { createContext, useReducer } from "react";
 
 export const ThemeContext = createContext({
-isDark : false,
+  isDark: false,
 });
 
 const reducer = (state, action) => {
@@ -17,12 +18,14 @@ const reducer = (state, action) => {
 };
 
 const GlobalStateProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, {
-        isDark: false,
-      });
+  const [state, dispatch] = useReducer(reducer, {
+    isDark: false,
+  });
 
   return (
-    <ThemeContext.Provider value={{state, dispatch}}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ state, dispatch }}>
+      {children}
+    </ThemeContext.Provider>
   );
 };
 
