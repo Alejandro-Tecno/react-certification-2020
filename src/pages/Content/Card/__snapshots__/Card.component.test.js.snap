@@ -7,7 +7,7 @@ exports[`Card creator Renders correctly 1`] = `
   onClick={[Function]}
 >
   <div
-    className="sc-gsTCUz dKMgDE"
+    className="sc-gsTCUz jOrZXk"
     data-testid="card_div"
   >
     <div

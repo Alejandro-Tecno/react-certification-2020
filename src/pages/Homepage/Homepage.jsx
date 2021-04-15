@@ -17,7 +17,7 @@ const StyledMain = styled.div`
   position: relative;
   .recomended-text {
     font-size: 3rem;
-    margin: 100px 0px 2px 50px;
+    margin: 20px 0px 2px 50px;
   }
 `;
 

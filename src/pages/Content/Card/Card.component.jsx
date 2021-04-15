@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
 function Card({ image, title, description, id }) {
-  
   return (
     <StyledLink to={`/video/${id}`}>
       <StyledCard data-testid="card_div">
@@ -39,19 +37,19 @@ const StyledCard = styled.div`
   flex-direction: column;
   width: 350px;
   align-items: center;
-  background: #ffffff;
+  /* background: #ffffff; */
   position: relative;
-  border: 1px solid #e7e5e5;
+  border: 1px solid #3a3a53;
   border-radius: 5px;
   margin: 10px 10px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.016),
-    -12px -12px 24px 0 rgba(255, 255, 255, 0.1);
+  /* box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.016),
+    -12px -12px 24px 0 rgba(255, 255, 255, 0.1); */
   &:hover {
     transform: scale(1.02);
-    box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.116),
-      -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
+    /* box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.116),
+      -12px -12px 24px 0 rgba(255, 255, 255, 0.5); */
   }
 
   .video-image {
@@ -62,11 +60,13 @@ const StyledCard = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
+
     img {
       display: block;
       width: 100%;
       height: auto;
       object-fit: cover;
+      border-radius: 5px 5px 0px 0px;
     }
   }
   .video-content {
@@ -75,14 +75,14 @@ const StyledCard = styled.div`
     h2 {
       font-size: 1.2rem;
       text-decoration: none;
-      color: black;
+      /* color: black; */
       overflow: hidden;
       text-overflow: ellipsis;
       height: 3rem;
     }
     p {
       font-size: 0.8rem;
-      color: #403d4e;
+      /* color: #403d4e; */
       text-decoration: none;
       overflow: hidden;
       text-overflow: ellipsis;

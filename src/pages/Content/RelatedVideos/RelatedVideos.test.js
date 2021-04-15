@@ -151,11 +151,11 @@ describe("Video", () => {
   );
 
   it("Renders images correctly", () => {
-    expect(screen.getAllByRole("img")).toHaveLength(3);
+    expect(screen.getAllByRole("img")).toHaveLength(5);
   });
 
   it("Renders titles correctly", () => {
-    expect(screen.getByText(/Sesame/i)).toBeInTheDocument();
+    expect(screen.getByText(/Birthdays/i)).toBeInTheDocument();
   });
 
   it("contains the Related videos text", () => {

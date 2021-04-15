@@ -2,12 +2,12 @@
 
 exports[`RelatedCard creator Renders correctly 1`] = `
 <a
-  className="sc-bdfBwQ kvZPMd"
+  className="sc-bdfBwQ gdgDdE"
   href="/video/123"
   onClick={[Function]}
 >
   <div
-    className="sc-gsTCUz kYQnbI"
+    className="sc-gsTCUz gcVeHO"
     data-testid="Relatedcard_div"
   >
     <div
