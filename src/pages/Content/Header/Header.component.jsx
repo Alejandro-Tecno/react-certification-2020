@@ -8,22 +8,26 @@ import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import { ThemeContext } from "../../../utils/GlobalStateProvider";
 import { Themes } from "../../../utils/themes";
+import { useHistory } from "react-router-dom";
+import UserContext from "../../../utils/UserContext";
 
 function Header() {
+  const { modalOpen, setModalOpen } = useContext(UserContext);
   const { state, dispatch } = useContext(ThemeContext);
-
+  let history = useHistory();
   return (
     <StyledHeader data-testid="Header" isDark={state.isDark}>
-      <div>
+      <StyledLeft>
         <button className="nav-selector" data-testid="nav_selector">
           <DehazeIcon />
         </button>
-      </div>
-      <Link to={`/`}>
-        <button className="home-selector">
-          <HomeIcon />
-        </button>
-      </Link>
+
+        <Link to={`/`}>
+          <button className="home-selector">
+            <HomeIcon />
+          </button>
+        </Link>
+      </StyledLeft>
       <SearchBar />
       <StyledRigth>
         <StyledDarkModeSelector
@@ -32,12 +36,14 @@ function Header() {
         >
           {state.isDark ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
         </StyledDarkModeSelector>
-        <div className="user">
+        {/* <Link to={`/login`}> */}
+        <div className="user" onClick={() => setModalOpen(true)}>
           <img
             alt="user"
             src="https://media.glassdoor.com/sqll/868055/wizeline-squarelogo-1473976610815.png"
           />
         </div>
+        {/* </Link> */}
       </StyledRigth>
     </StyledHeader>
   );
@@ -157,11 +163,19 @@ const StyledRigth = styled.div`
   }
 `;
 
+const StyledLeft = styled.div`
+  display: flex;
+  flex-direction: table-row;
+  align-items: center;
+`;
+
 const StyledDarkModeSelector = styled.button`
   margin-right: 15px;
   font-size: 1.5rem;
   color: white;
   display: flex;
+  background: transparent;
+  border: none;
 `;
 
 export default Header;

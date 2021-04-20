@@ -5,6 +5,10 @@ const UserContext = createContext({
   setSearchTerm: () => {},
   darkTheme: false,
   setDarkTheme: () => {},
+  modalOpen: false,
+  setModalOpen: () => {},
+  isLogged: false,
+  setIsLogged: () => {},
 });
 
 export default UserContext;

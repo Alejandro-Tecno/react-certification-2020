@@ -8,21 +8,34 @@ import SearchPage from "../../pages/SearchPage";
 import UserContext from "../../utils/UserContext";
 import Video from "../../pages/Content/Video";
 import GlobalStateProvider from "../../utils/GlobalStateProvider";
+import Modal from "../Login/";
 
 require("dotenv").config();
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("elmo");
   const [darkTheme, setDarkTheme] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
   return (
     <BrowserRouter>
       <GlobalStateProvider>
         <Layout>
           <UserContext.Provider
-            value={{ searchTerm, setSearchTerm, darkTheme, setDarkTheme }}
+            value={{
+              searchTerm,
+              setSearchTerm,
+              darkTheme,
+              setDarkTheme,
+              modalOpen,
+              setModalOpen,
+              isLogged,
+              setIsLogged,
+            }}
           >
             <Header />
+            <Modal />
             <Switch>
               <Route exact path="/">
                 <Homepage />
@@ -33,6 +46,9 @@ function App() {
               <Route path="/video/:id">
                 <Video />
               </Route>
+              {/*               <Route path="/login">
+                <Modal>Log in</Modal>
+              </Route> */}
               <Route path="*">
                 <NotFound />
               </Route>

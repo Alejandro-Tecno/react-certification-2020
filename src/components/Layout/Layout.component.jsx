@@ -16,14 +16,14 @@ function Layout({ children }) {
       ? Themes.dark.background
       : Themes.ligth.background};
     overflow: scroll;
-    button {
+    /*  button {
       all: initial;
       all: unset;
       background: none;
       color: white;
       border: none;
       cursor: pointer;
-    }
+    } */
     a,
     p,
     h3,
