@@ -104,7 +104,7 @@ const StyledForm = styled.div`
       cursor: pointer;
       margin-top: 5px;
       &:hover {
-        background: #576c8b;
+        filter: brightness(1.2);
       }
     }
   }

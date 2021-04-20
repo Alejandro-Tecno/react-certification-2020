@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import HomeIcon from "@material-ui/icons/Home";
@@ -6,20 +6,26 @@ import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar/SearchBar";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+import StarIcon from "@material-ui/icons/Star";
 import { ThemeContext } from "../../../utils/GlobalStateProvider";
 import { Themes } from "../../../utils/themes";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../../utils/UserContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import Dropdown from "../../../components/Dropdown";
 
 function Header() {
   const { modalOpen, setModalOpen } = useContext(UserContext);
   const { state, dispatch } = useContext(ThemeContext);
+  const { loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
+  const [open, setOpen] = useState(false);
   let history = useHistory();
   return (
     <StyledHeader data-testid="Header" isDark={state.isDark}>
       <StyledLeft>
-        <button className="nav-selector" data-testid="nav_selector">
-          <DehazeIcon />
+        <button className="favorites-selector" data-testid="nav_selector">
+          <StarIcon />
         </button>
 
         <Link to={`/`}>
@@ -37,11 +43,18 @@ function Header() {
           {state.isDark ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
         </StyledDarkModeSelector>
         {/* <Link to={`/login`}> */}
-        <div className="user" onClick={() => setModalOpen(true)}>
-          <img
-            alt="user"
-            src="https://media.glassdoor.com/sqll/868055/wizeline-squarelogo-1473976610815.png"
-          />
+        <div
+          className="user"
+          /* onClick={() =>  loginWithRedirect()} */
+          onClick={() => setOpen(!open)}
+        >
+          {isAuthenticated ? (
+            <img alt={user.className} src={user.picture} />
+          ) : (
+            <img alt="user" src="user.png" />
+          )}
+
+          <Dropdown open={open} />
         </div>
         {/* </Link> */}
       </StyledRigth>
@@ -72,8 +85,9 @@ const StyledHeader = styled.header`
     justify-content: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
-  .nav-selector,
+  .favorites-selector,
   .home-selector {
     align-items: flex-start;
     background: none;
