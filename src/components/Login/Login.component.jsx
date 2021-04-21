@@ -4,20 +4,33 @@ import ReactDom from "react-dom";
 import { ThemeContext } from "../../utils/GlobalStateProvider";
 import { Themes } from "../../utils/themes";
 import UserContext from "../../utils/UserContext";
-import loginApi from "../../utils/login.api";
+import { useAuth } from "../provider/Auth.provider";
+import { useHistory } from "react-router";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Login() {
   const { state } = useContext(ThemeContext);
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const { loginWithRedirect } = useAuth0();
   const { modalOpen, setModalOpen, isLogged, setIsLogged } = useContext(
     UserContext
   );
-  const [user, SetUser] = useState(null);
+  /* const [user, SetUser] = useState(null); */
+  const { internalLogin } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const HandleLogin = () => {
-    loginApi();
+  const HandleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await internalLogin(username, password);
+      setModalOpen(false);
+    } catch (err) {
+      console.log(err);
+      setError("Wrong credentials");
+    }
   };
+
   return (
     modalOpen &&
     ReactDom.createPortal(
@@ -29,15 +42,15 @@ function Login() {
             X
           </button>
           <form onSubmit={HandleLogin}>
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               required
               type="text"
               id="username"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               required
               type="password"
@@ -45,8 +58,15 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button>Log in</button>
+            <button type="submit">Login</button>
           </form>
+          <div className="signWithgoogle">
+            <p>or</p>
+            <button onClick={() => loginWithRedirect()}>
+              Sign in with Google
+            </button>
+          </div>
+          {error && <span>{error}</span>}
         </StyledForm>
       </>,
       document.getElementById("portal")
@@ -61,7 +81,7 @@ const StyledOverlay = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 const StyledForm = styled.div`
   border: 1px solid black;
@@ -124,6 +144,35 @@ const StyledForm = styled.div`
     padding: 6px;
     border-radius: 5px;
     font-weight: bolder;
+  }
+  .signWithgoogle {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    p {
+      margin: 2px;
+    }
+    button {
+      background: ${(props) =>
+        props.isDark ? Themes.dark.headerColor : Themes.ligth.headerColor};
+      text-align: center;
+      padding: 3px;
+      width: 100%;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 1.3rem;
+      color: white;
+      cursor: pointer;
+      margin-top: 0px;
+      &:hover {
+        filter: brightness(1.2);
+      }
+    }
+  }
+  span {
+    color: #a31616;
+    font-size: 1rem;
   }
 `;
 

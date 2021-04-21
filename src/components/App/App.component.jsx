@@ -9,7 +9,7 @@ import UserContext from "../../utils/UserContext";
 import Video from "../../pages/Content/Video";
 import GlobalStateProvider from "../../utils/GlobalStateProvider";
 import Modal from "../Login/";
-
+import AuthProvider from "../provider";
 require("dotenv").config();
 
 function App() {
@@ -19,44 +19,46 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
 
   return (
-    <BrowserRouter>
-      <GlobalStateProvider>
-        <Layout>
-          <UserContext.Provider
-            value={{
-              searchTerm,
-              setSearchTerm,
-              darkTheme,
-              setDarkTheme,
-              modalOpen,
-              setModalOpen,
-              isLogged,
-              setIsLogged,
-            }}
-          >
-            <Header />
-            <Modal />
-            <Switch>
-              <Route exact path="/">
-                <Homepage />
-              </Route>
-              <Route path="/search/:searchTerm">
-                <SearchPage />
-              </Route>
-              <Route path="/video/:id">
-                <Video />
-              </Route>
-              {/*               <Route path="/login">
+    <AuthProvider>
+      <BrowserRouter>
+        <GlobalStateProvider>
+          <Layout>
+            <UserContext.Provider
+              value={{
+                searchTerm,
+                setSearchTerm,
+                darkTheme,
+                setDarkTheme,
+                modalOpen,
+                setModalOpen,
+                isLogged,
+                setIsLogged,
+              }}
+            >
+              <Header />
+              <Modal />
+              <Switch>
+                <Route exact path="/">
+                  <Homepage />
+                </Route>
+                <Route path="/search/:searchTerm">
+                  <SearchPage />
+                </Route>
+                <Route path="/video/:id">
+                  <Video />
+                </Route>
+                {/*               <Route path="/login">
                 <Modal>Log in</Modal>
               </Route> */}
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </UserContext.Provider>
-        </Layout>
-      </GlobalStateProvider>
-    </BrowserRouter>
+                <Route path="*">
+                  <NotFound />
+                </Route>
+              </Switch>
+            </UserContext.Provider>
+          </Layout>
+        </GlobalStateProvider>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

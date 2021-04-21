@@ -1,23 +1,30 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../provider";
 
 function Dropdown({ open }) {
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
   const { user, isAuthenticated } = useAuth0();
+  const { authenticated, internalLogout } = useAuth();
 
   return (
     <StyledDropdown>
       {open && (
         <>
-          {!isAuthenticated && (
+          {!isAuthenticated && !authenticated && (
             <button className="login" onClick={() => loginWithRedirect()}>
               Log in
             </button>
           )}
           {isAuthenticated && (
             <button className="logout" onClick={() => logout()}>
+              Log out
+            </button>
+          )}
+          {authenticated && (
+            <button className="logout" onClick={() => internalLogout()}>
               Log out
             </button>
           )}

@@ -9,6 +9,10 @@ const UserContext = createContext({
   setModalOpen: () => {},
   isLogged: false,
   setIsLogged: () => {},
+  favoriteVideos: [],
+  addFavoriteVideo: () => {},
+  removeFavoriteVideo: () => {},
+  userInfo: null,
 });
 
 export default UserContext;

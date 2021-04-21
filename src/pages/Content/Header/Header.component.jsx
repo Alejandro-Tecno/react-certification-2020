@@ -13,6 +13,7 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../../../utils/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import Dropdown from "../../../components/Dropdown";
+import { useAuth } from "../../../components/provider";
 
 function Header() {
   const { modalOpen, setModalOpen } = useContext(UserContext);
@@ -20,7 +21,17 @@ function Header() {
   const { loginWithRedirect } = useAuth0();
   const { user, isAuthenticated } = useAuth0();
   const [open, setOpen] = useState(false);
+  const { authenticated, internalUser } = useAuth();
   let history = useHistory();
+
+  const handleAuth = (e) => {
+    e.preventDefault();
+    isAuthenticated
+      ? setOpen(!open)
+      : authenticated
+      ? setOpen(!open)
+      : setModalOpen(true);
+  };
   return (
     <StyledHeader data-testid="Header" isDark={state.isDark}>
       <StyledLeft>
@@ -46,12 +57,15 @@ function Header() {
         <div
           className="user"
           /* onClick={() =>  loginWithRedirect()} */
-          onClick={() => setOpen(!open)}
+          /* onClick={() => setOpen(!open)} */
+          onClick={(e) => handleAuth(e)}
         >
           {isAuthenticated ? (
             <img alt={user.className} src={user.picture} />
+          ) : authenticated ? (
+            <img alt={internalUser.name} src={internalUser.avatarUrl} />
           ) : (
-            <img alt="user" src="user.png" />
+            <img alt="user" src="https://i.imgur.com/Cndlg8Q.png" />
           )}
 
           <Dropdown open={open} />
