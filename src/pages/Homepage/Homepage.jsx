@@ -15,6 +15,7 @@ const StyledMain = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+
   .recomended-text {
     font-size: 3rem;
     margin: 20px 0px 2px 50px;

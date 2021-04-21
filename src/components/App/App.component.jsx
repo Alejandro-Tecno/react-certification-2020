@@ -7,16 +7,17 @@ import Header from "../../pages/Content/Header";
 import SearchPage from "../../pages/SearchPage";
 import UserContext from "../../utils/UserContext";
 import Video from "../../pages/Content/Video";
-import GlobalStateProvider from "../../utils/GlobalStateProvider";
+import GlobalStateProvider from "../providers/GlobalState/GlobalStateProvider";
 import Modal from "../Login/";
-import AuthProvider from "../provider";
+import AuthProvider from "../providers/Auth";
+import ProtectedRoute from "./ProtectedRoute";
+import Favorites from "../../pages/Favorites";
 require("dotenv").config();
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("elmo");
   const [darkTheme, setDarkTheme] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
 
   return (
     <AuthProvider>
@@ -31,8 +32,6 @@ function App() {
                 setDarkTheme,
                 modalOpen,
                 setModalOpen,
-                isLogged,
-                setIsLogged,
               }}
             >
               <Header />
@@ -47,9 +46,7 @@ function App() {
                 <Route path="/video/:id">
                   <Video />
                 </Route>
-                {/*               <Route path="/login">
-                <Modal>Log in</Modal>
-              </Route> */}
+                <ProtectedRoute path="/favorites" component={Favorites} />
                 <Route path="*">
                   <NotFound />
                 </Route>

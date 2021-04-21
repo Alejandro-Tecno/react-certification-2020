@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../../utils/GlobalStateProvider";
+import { GlobalContext } from "../providers/GlobalState/GlobalStateProvider";
 import { Themes } from "../../utils/themes";
 
 function Layout({ children }) {
-  const { state } = useContext(ThemeContext);
+  const { state } = useContext(GlobalContext);
 
   const StyledContainer = styled.main`
-    width: 100vw;
+    /* width: 100vw; */
     color: ${state.isDark ? Themes.dark.font : Themes.ligth.font};
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ function Layout({ children }) {
     background: ${state.isDark
       ? Themes.dark.background
       : Themes.ligth.background};
-    overflow: scroll;
+    /* overflow: scroll; */
     /*  button {
       all: initial;
       all: unset;

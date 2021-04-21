@@ -28,7 +28,7 @@ function RelatedVideos({ relatedData }) {
 }
 
 const StyledRelatedVideos = styled.div`
-  height: 90vh;
+  height: calc(100vh - 60px);
   overflow-y: scroll;
   margin-top: 0px;
   display: flex;

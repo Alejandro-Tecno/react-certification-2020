@@ -32,7 +32,7 @@ const StyledCardList = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 90vh;
+
   justify-content: space-around;
   padding: 1rem 2rem;
   margin-top: 5px;

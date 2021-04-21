@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "../provider";
+import { useAuth } from "../providers/Auth";
 
 function Dropdown({ open }) {
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const { authenticated, internalLogout } = useAuth();
 
   return (

@@ -1,19 +1,16 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import ReactDom from "react-dom";
-import { ThemeContext } from "../../utils/GlobalStateProvider";
+import { GlobalContext } from "../providers/GlobalState/GlobalStateProvider";
 import { Themes } from "../../utils/themes";
 import UserContext from "../../utils/UserContext";
-import { useAuth } from "../provider/Auth.provider";
-import { useHistory } from "react-router";
+import { useAuth } from "../providers/Auth/Auth.provider";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Login() {
-  const { state } = useContext(ThemeContext);
+  const { state } = useContext(GlobalContext);
   const { loginWithRedirect } = useAuth0();
-  const { modalOpen, setModalOpen, isLogged, setIsLogged } = useContext(
-    UserContext
-  );
+  const { modalOpen, setModalOpen } = useContext(UserContext);
   /* const [user, SetUser] = useState(null); */
   const { internalLogin } = useAuth();
   const [username, setUsername] = useState("");

@@ -3,11 +3,15 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import device from "../../../utils/breakpoints";
-
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../../components/providers/Auth";
+import StarIcon from "@material-ui/icons/Star";
 require("dotenv").config();
 
 function Video() {
   const { id: videoId } = useParams();
+  const { isAuthenticated } = useAuth0();
+  const { authenticated } = useAuth();
 
   //fectch
   const [data, setData] = useState(null);
@@ -65,8 +69,18 @@ function Video() {
               frameborder="0"
             ></StyledVideo>
           </StyledVideoView>
+
           <StyledVideoDetails>
-            <h3>{data.items[0].snippet.title}</h3>
+            <div className="top">
+              <h3>{data.items[0].snippet.title}</h3>
+              {(authenticated || isAuthenticated) && (
+                <button className="addToFavorites">
+                  <span>Add to favorites</span>
+                  <StarIcon />
+                </button>
+              )}
+            </div>
+
             <p>{data.items[0].snippet.description}</p>
           </StyledVideoDetails>
         </StyledVideoContainer>
@@ -83,9 +97,13 @@ function Video() {
 }
 
 const StyledVideoPage = styled.div`
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: row;
-  overflow: auto;
+  -webkit-scrollbar {
+    display: none;
+  }
+  overflow: hidden;
   @media ${device.sm} {
     flex-direction: column;
     overflow: scroll;
@@ -107,6 +125,13 @@ const StyledVideoDetails = styled.div`
   text-overflow: ellipsis;
 
   -webkit-box-orient: vertical;
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
   h3 {
     margin: 6px 1px;
     font-size: 1.5em;
@@ -141,11 +166,11 @@ const StyledVideoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 0;
-  height: 90vh;
+  /* height: 90vh; */
   padding: 1rem 2rem;
   overflow: hidden;
   overflow-y: hidden;
-  border: 1px solid #302f2f;
+  /* border: 1px solid #302f2f; */
   @media ${device.sm} {
     width: 100%;
     margin-right: 10px;
@@ -163,6 +188,25 @@ const StyledVideoContainer = styled.div`
     text-overflow: ellipsis;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+  }
+
+  button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #384d5f;
+    color: white;
+    width: auto;
+    margin: 10px;
+    padding: 5px 10px;
+    align-self: center;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    &:hover {
+      background: #56718a;
+    }
   }
 `;
 

@@ -1,28 +1,25 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import DehazeIcon from "@material-ui/icons/Dehaze";
 import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar/SearchBar";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import StarIcon from "@material-ui/icons/Star";
-import { ThemeContext } from "../../../utils/GlobalStateProvider";
+import { GlobalContext } from "../../../components/providers/GlobalState/GlobalStateProvider";
 import { Themes } from "../../../utils/themes";
-import { useHistory } from "react-router-dom";
+
 import UserContext from "../../../utils/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import Dropdown from "../../../components/Dropdown";
-import { useAuth } from "../../../components/provider";
+import { useAuth } from "../../../components/providers/Auth";
 
 function Header() {
-  const { modalOpen, setModalOpen } = useContext(UserContext);
-  const { state, dispatch } = useContext(ThemeContext);
-  const { loginWithRedirect } = useAuth0();
+  const { setModalOpen } = useContext(UserContext);
+  const { state, dispatch } = useContext(GlobalContext);
   const { user, isAuthenticated } = useAuth0();
   const [open, setOpen] = useState(false);
   const { authenticated, internalUser } = useAuth();
-  let history = useHistory();
 
   const handleAuth = (e) => {
     e.preventDefault();
@@ -35,12 +32,19 @@ function Header() {
   return (
     <StyledHeader data-testid="Header" isDark={state.isDark}>
       <StyledLeft>
-        <button className="favorites-selector" data-testid="nav_selector">
-          <StarIcon />
-        </button>
-
+        {(authenticated || isAuthenticated) && (
+          <Link to={`/favorites`}>
+            <button
+              title="Favorite videos"
+              className="favorites-selector"
+              data-testid="nav_selector"
+            >
+              <StarIcon />
+            </button>
+          </Link>
+        )}
         <Link to={`/`}>
-          <button className="home-selector">
+          <button className="home-selector" title="Homepage">
             <HomeIcon />
           </button>
         </Link>
@@ -48,6 +52,7 @@ function Header() {
       <SearchBar />
       <StyledRigth>
         <StyledDarkModeSelector
+          title="Set Dark mode on/off"
           data-testid="darkModeButton"
           onClick={() => dispatch({ type: "TOOGLE_DARK_MODE" })}
         >
