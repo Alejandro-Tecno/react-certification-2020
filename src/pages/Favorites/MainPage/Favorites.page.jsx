@@ -3,7 +3,7 @@ import { useFavorites } from "../../../components/providers/Favorites";
 import FavoriteCard from "../FavoriteCard/FavoriteCard";
 import styled from "styled-components";
 function Favorites() {
-  const { state } = useFavorites();
+  const { state, removeVideo } = useFavorites();
   const { favorites } = state;
   /*   const handleRemove = (video) => {
     console.log("holi");
@@ -21,7 +21,7 @@ function Favorites() {
               key={video.id}
               id={video.id}
               title={video.snippet.title}
-              /* handleRemove={handleRemove(video)} */
+              removeVideo={() => removeVideo(video)}
             />
           ))
         ) : (

@@ -35,15 +35,4 @@ describe("Video", () => {
     /* expect(screen.getAllByText(/Loading/i)).toBeInTheDocument(); */
     expect(screen.getAllByText(/Loading/i)).toHaveLength(2);
   });
-
-  /*   it("Renders correctly", async () => {
-    render(
-      <Router history={history}>
-        <Video />
-      </Router>
-    );
-    await screen.debug();
-    await expect(screen.findByText(/Sesame/i)).toBeInTheDocument();
-    expect(loadData).toHaveBeenCalled();
-  }); */
 });

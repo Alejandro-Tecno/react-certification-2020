@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import StarIcon from "@material-ui/icons/Star";
+import { useFavorites } from "../../../components/providers/Favorites";
 
-function FavoriteCard({ id, description, image, title }) {
-
+function FavoriteCard({ id, description, image, title, removeVideo }) {
   return (
     <StyledCardHolder>
       <StyledLink to={`/favorites/${id}`}>
@@ -22,10 +23,10 @@ function FavoriteCard({ id, description, image, title }) {
           </div>
         </StyledCard>
       </StyledLink>
-      {/* <button >
+      <button onClick={() => removeVideo()}>
         <span>Remove</span>
         <StarIcon />
-      </button> */}
+      </button>
     </StyledCardHolder>
   );
 }

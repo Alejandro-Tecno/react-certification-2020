@@ -17,9 +17,9 @@ import { useAuth } from "../../../components/providers/Auth";
 function Header() {
   const { setModalOpen } = useContext(UserContext);
   const { state, dispatch } = useContext(GlobalContext);
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0();
   const [open, setOpen] = useState(false);
-  const { authenticated, internalUser } = useAuth();
+  const { authenticated, internalUser, internalLogout } = useAuth();
 
   const handleAuth = (e) => {
     e.preventDefault();
@@ -34,17 +34,17 @@ function Header() {
       <StyledLeft>
         {(authenticated || isAuthenticated) && (
           <Link to={`/favorites`}>
-            <button
-              title="Favorite videos"
-              className="favorites-selector"
-              data-testid="nav_selector"
-            >
+            <button title="Favorite videos" className="favorites-selector">
               <StarIcon />
             </button>
           </Link>
         )}
         <Link to={`/`}>
-          <button className="home-selector" title="Homepage">
+          <button
+            data-testid="home_selector"
+            className="home-selector"
+            title="Homepage"
+          >
             <HomeIcon />
           </button>
         </Link>
@@ -58,13 +58,8 @@ function Header() {
         >
           {state.isDark ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
         </StyledDarkModeSelector>
-        {/* <Link to={`/login`}> */}
-        <div
-          className="user"
-          /* onClick={() =>  loginWithRedirect()} */
-          /* onClick={() => setOpen(!open)} */
-          onClick={(e) => handleAuth(e)}
-        >
+
+        <div className="user" onClick={(e) => handleAuth(e)}>
           {isAuthenticated ? (
             <img alt={user.className} src={user.picture} />
           ) : authenticated ? (
@@ -73,9 +68,15 @@ function Header() {
             <img alt="user" src="https://i.imgur.com/Cndlg8Q.png" />
           )}
 
-          <Dropdown open={open} />
+          <Dropdown
+            open={open}
+            authenticated={authenticated}
+            isAuthenticated={isAuthenticated}
+            internalLogout={internalLogout}
+            logout={logout}
+            loginWithRedirect={loginWithRedirect}
+          />
         </div>
-        {/* </Link> */}
       </StyledRigth>
     </StyledHeader>
   );

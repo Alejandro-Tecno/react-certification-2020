@@ -11,7 +11,6 @@ function Login() {
   const { state } = useContext(GlobalContext);
   const { loginWithRedirect } = useAuth0();
   const { modalOpen, setModalOpen } = useContext(UserContext);
-  /* const [user, SetUser] = useState(null); */
   const { internalLogin } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
