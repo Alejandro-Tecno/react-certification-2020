@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import Layout from "../Layout";
 import NotFound from "../../pages/NotFound";
 import Homepage from "../../pages/Homepage";
@@ -24,7 +25,7 @@ function App() {
   return (
     <AuthProvider>
       <FavoritesProvider>
-        <BrowserRouter>
+        <HashRouter>
           <GlobalStateProvider>
             <Layout>
               <UserContext.Provider
@@ -61,7 +62,7 @@ function App() {
               </UserContext.Provider>
             </Layout>
           </GlobalStateProvider>
-        </BrowserRouter>
+        </HashRouter>
       </FavoritesProvider>
     </AuthProvider>
   );
