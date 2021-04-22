@@ -11,7 +11,9 @@ import GlobalStateProvider from "../providers/GlobalState/GlobalStateProvider";
 import Modal from "../Login/";
 import AuthProvider from "../providers/Auth";
 import ProtectedRoute from "./ProtectedRoute";
-import Favorites from "../../pages/Favorites";
+import Favorites from "../../pages/Favorites/MainPage";
+import FavoritesProvider from "../providers/Favorites";
+import FavoriteView from "../../pages/Favorites/FavoriteView/FavoriteView";
 require("dotenv").config();
 
 function App() {
@@ -21,40 +23,46 @@ function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <GlobalStateProvider>
-          <Layout>
-            <UserContext.Provider
-              value={{
-                searchTerm,
-                setSearchTerm,
-                darkTheme,
-                setDarkTheme,
-                modalOpen,
-                setModalOpen,
-              }}
-            >
-              <Header />
-              <Modal />
-              <Switch>
-                <Route exact path="/">
-                  <Homepage />
-                </Route>
-                <Route path="/search/:searchTerm">
-                  <SearchPage />
-                </Route>
-                <Route path="/video/:id">
-                  <Video />
-                </Route>
-                <ProtectedRoute path="/favorites" component={Favorites} />
-                <Route path="*">
-                  <NotFound />
-                </Route>
-              </Switch>
-            </UserContext.Provider>
-          </Layout>
-        </GlobalStateProvider>
-      </BrowserRouter>
+      <FavoritesProvider>
+        <BrowserRouter>
+          <GlobalStateProvider>
+            <Layout>
+              <UserContext.Provider
+                value={{
+                  searchTerm,
+                  setSearchTerm,
+                  darkTheme,
+                  setDarkTheme,
+                  modalOpen,
+                  setModalOpen,
+                }}
+              >
+                <Header />
+                <Modal />
+                <Switch>
+                  <Route exact path="/">
+                    <Homepage />
+                  </Route>
+                  <Route path="/search/:searchTerm">
+                    <SearchPage />
+                  </Route>
+                  <Route path="/video/:id">
+                    <Video />
+                  </Route>
+                  <ProtectedRoute
+                    path="/favorites/:id"
+                    component={FavoriteView}
+                  />
+                  <ProtectedRoute path="/favorites" component={Favorites} />
+                  <Route path="*">
+                    <NotFound />
+                  </Route>
+                </Switch>
+              </UserContext.Provider>
+            </Layout>
+          </GlobalStateProvider>
+        </BrowserRouter>
+      </FavoritesProvider>
     </AuthProvider>
   );
 }

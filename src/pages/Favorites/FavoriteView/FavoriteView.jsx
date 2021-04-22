@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import RelatedVideos from "../RelatedVideos/RelatedVideos";
+import RelatedVideos from "../../Content/RelatedVideos";
 import device from "../../../utils/breakpoints";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAuth } from "../../../components/providers/Auth";
@@ -9,7 +9,7 @@ import StarIcon from "@material-ui/icons/Star";
 import { useFavorites } from "../../../components/providers/Favorites";
 require("dotenv").config();
 
-function Video() {
+function FavoriteView() {
   const { id: videoId } = useParams();
   const { isAuthenticated } = useAuth0();
   const { authenticated } = useAuth();
@@ -18,9 +18,9 @@ function Video() {
   const [favoriteVideo, setFavoriteVideo] = useState(false);
   //fectch
   const [data, setData] = useState(null);
-  const [relatedData, setRelatedData] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [loaded, setLoaded] = useState(false);
   const KEY = process.env.REACT_APP_API_KEY1;
   const URL = "https://www.googleapis.com/youtube/v3/";
@@ -40,26 +40,10 @@ function Video() {
         });
     };
 
-    const loadRelatedVideos = async () => {
-      await fetch(
-        `${URL}search?part=id%2C+snippet&relatedToVideoId=${videoId}&key=${KEY}&order=viewCount&type=video&maxResults=12`
-      )
-        .then((response) => response.json())
-        .then((receivedData) => {
-          setRelatedData(receivedData);
-          setLoaded(true);
-        })
-        .catch((error) => {
-          setError(error);
-          setLoaded(true);
-        });
-    };
-
     const HandleFavorites = favorites.find((video) => videoId === video.id);
     HandleFavorites ? setFavoriteVideo(true) : setFavoriteVideo(false);
 
     loadData();
-    loadRelatedVideos();
   }, [videoId, KEY, favorites]);
 
   //fectch
@@ -106,11 +90,7 @@ function Video() {
       ) : (
         "Loading"
       )}
-      {relatedData && loaded ? (
-        <RelatedVideos relatedData={relatedData} />
-      ) : (
-        <p>Loading</p>
-      )}
+      {favorites ? <RelatedVideos relatedData={favorites} /> : <p>Loading</p>}
     </StyledVideoPage>
   );
 }
@@ -152,8 +132,8 @@ const StyledVideoDetails = styled.div`
     margin-bottom: 5px;
   }
   h3 {
-    width: 80%;
     margin: 6px 1px;
+    width: 80%;
     font-size: 1.5em;
   }
   /* @media (max-width: 768px) {
@@ -216,7 +196,7 @@ const StyledVideoContainer = styled.div`
     align-items: center;
     background: #384d5f;
     color: white;
-    width: auto;
+    width: 200px;
     margin: 10px;
     padding: 5px 10px;
     align-self: center;
@@ -230,4 +210,4 @@ const StyledVideoContainer = styled.div`
   }
 `;
 
-export default Video;
+export default FavoriteView;

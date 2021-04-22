@@ -11,7 +11,11 @@ function Card({ image, title, description, id }) {
         </div>
         <div className="video-content">
           <h2 data-testid="card_h2">
-            {title.replace(/&#39;/, "'").replace(/&amp;/, "&")}
+            {title
+              .replace(/&#39;/, "'")
+              .replace(/&quot;/, "'")
+              .replace(/&amp;/, "&")}
+            ;
           </h2>
           <p data-testid="video_description">{description}</p>
         </div>

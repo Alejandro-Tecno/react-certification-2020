@@ -21,9 +21,7 @@ function AuthProvider({ children }) {
   const [internalUser, setInternalUser] = useState(null);
 
   const internalLogin = useCallback(async (username, password) => {
-    console.log(username, password);
     const res = await loginApi(username, password);
-    console.log(res);
     if (res) {
       setInternalUser(res);
       setAuthenticated(true);

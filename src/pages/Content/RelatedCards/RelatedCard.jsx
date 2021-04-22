@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import device from "../../../utils/breakpoints";
 
-function RelatedCard({ image, title, id }) {
+function RelatedCard({ image, title, id, location }) {
   return (
-    <StyledLink to={`/video/${id}`}>
+    <StyledLink to={location ? `/favorites/${id}` : `/video/${id}`}>
       <StyledCard data-testid="Relatedcard_div">
         <div className="video-image">
           <img data-testid="card_img" src={image} alt="" />
