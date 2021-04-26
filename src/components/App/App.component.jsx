@@ -42,10 +42,10 @@ function App() {
                 <Modal />
                 <Switch>
                   <Route exact path="/">
-                    <Homepage />
+                    <Homepage title="Recommended videos" />
                   </Route>
                   <Route path="/search/:searchTerm">
-                    <SearchPage />
+                    <Homepage title="Search results"/>
                   </Route>
                   <Route path="/video/:id">
                     <Video />

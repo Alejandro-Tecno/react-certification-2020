@@ -4,7 +4,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import AuthProvider from "../providers/Auth";
 
-
 describe("Dropdown", () => {
   const loginWithRedirect = jest.fn().mockImplementation(() => {});
   const logout = jest.fn().mockImplementation(() => {});
