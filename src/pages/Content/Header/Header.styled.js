@@ -1,7 +1,6 @@
 import { Themes } from "../../../utils/themes";
 import device from "../../../utils/breakpoints";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const StyledHeader = styled.header`
 position: sticky;
@@ -89,7 +88,7 @@ display: flex;
 align-items: center;
 justify-content: flex-end;
 flex: 1;
-margin-right: 1rem;
+margin-right: 0rem;
 font-size: 1.5rem !important;
 @media ${device.xs}  {
   margin-right: 5px;
@@ -111,7 +110,7 @@ img {
   }
 }
 img:hover {
-  border: 2px solid #bebebe;
+  cursor:pointer;
 }
 `;
 

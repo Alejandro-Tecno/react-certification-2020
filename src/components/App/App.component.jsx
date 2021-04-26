@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { HashRouter } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import Layout from "../Layout";
 import NotFound from "../../pages/NotFound";
 import Homepage from "../../pages/Homepage";
 import Header from "../../pages/Content/Header";
-import SearchPage from "../../pages/SearchPage";
 import UserContext from "../../utils/UserContext";
 import Video from "../../pages/Content/Video";
 import GlobalStateProvider from "../providers/GlobalState/GlobalStateProvider";

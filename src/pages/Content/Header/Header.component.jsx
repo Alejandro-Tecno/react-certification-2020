@@ -71,7 +71,7 @@ function Header() {
             isAuthenticated={isAuthenticated}
             internalLogout={internalLogout}
             logout={logout}
-            /*  loginWithRedirect={loginWithRedirect} */
+             loginWithRedirect={loginWithRedirect}
           />
         </div>
       </StyledRigth>

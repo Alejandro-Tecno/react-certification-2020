@@ -1,9 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import device from "../../../utils/breakpoints";
-
-
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
