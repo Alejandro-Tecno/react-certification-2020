@@ -8,10 +8,10 @@ import translationEs from "../src/lang/es/translation.json";
 
 const fallbackLng = ["en"];
 const resources = {
-  en: {
+  "en": {
     translation: translationEn,
   },
-  es: {
+  "es-MX": {
     translation: translationEs,
   },
 };
@@ -26,7 +26,7 @@ i18n
     debug: false,
 
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
   });
 

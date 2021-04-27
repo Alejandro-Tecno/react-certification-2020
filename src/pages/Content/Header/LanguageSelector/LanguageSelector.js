@@ -12,7 +12,7 @@ import { GlobalContext } from "../../../../components/providers/GlobalState/Glob
 
 const languageMap = {
   en: { label: "English", dir: "ltr", active: true },
-  es: { label: "Español", dir: "ltr", active: false },
+  "es-MX": { label: "Español", dir: "ltr", active: false },
 };
 
 const LanguageSelect = () => {
