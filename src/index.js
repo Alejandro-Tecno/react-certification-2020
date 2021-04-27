@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "././components/App";
@@ -10,13 +10,15 @@ const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 ReactDOM.render(
-  <Auth0Provider
-    domain={domain}
-    clientId={clientId}
-    redirectUri={window.location.origin}
-  >
-    <App />
-  </Auth0Provider>,
+  <Suspense fallback={<div>Loading... </div>}>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      redirectUri={window.location.origin}
+    >
+      <App />
+    </Auth0Provider>
+  </Suspense>,
   document.getElementById("root")
 );
 

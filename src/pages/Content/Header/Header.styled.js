@@ -15,6 +15,8 @@ export const StyledHeader = styled.header`
   align-items: center;
   z-index: 100;
 
+ 
+
   button {
     margin: 0px 10px;
     box-sizing: border-box;
@@ -52,10 +54,11 @@ export const StyledHeader = styled.header`
     margin-left: 2rem;
     transition: all 0.6s ease-in-out;
 
-    }
-    &:focus {
-      /* max-width: 40vw; */
-    }
+    &:focus ~ .fEoELR {
+       
+    background: red !important;
+  }
+    
     &:hover {
       /* max-width: 40vw; */
       input {
