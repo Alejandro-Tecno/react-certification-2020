@@ -4,7 +4,8 @@ import { GlobalContext } from "../providers/GlobalState/GlobalStateProvider";
 import UserContext from "../../utils/UserContext";
 import { useAuth } from "../providers/Auth/Auth.provider";
 import { useAuth0 } from "@auth0/auth0-react";
-import {StyledOverlay,StyledForm} from "./Login.styled"
+import { StyledOverlay, StyledForm } from "./Login.styled";
+import { useTranslation } from "react-i18next";
 
 function Login() {
   const { state } = useContext(GlobalContext);
@@ -14,6 +15,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   const HandleLogin = async (e) => {
     e.preventDefault();
@@ -32,12 +34,12 @@ function Login() {
       <>
         <StyledOverlay />
         <StyledForm isDark={state.isDark}>
-          <h2>Log in</h2>
+          <h2>{t("logIn")}</h2>
           <button className="close" onClick={() => setModalOpen(false)}>
             X
           </button>
           <form onSubmit={HandleLogin}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">{t("username")}</label>
             <input
               required
               type="text"
@@ -45,7 +47,7 @@ function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("password")}</label>
             <input
               required
               type="password"
@@ -53,12 +55,12 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+            <button type="submit">{t("logIn")}</button>
           </form>
           <div className="signWithgoogle">
-            <p>or</p>
+            <p>{t("or")}</p>
             <button onClick={() => loginWithRedirect()}>
-              Sign in with Google
+              {t("signInGoogle")}
             </button>
           </div>
           {error && <span>{error}</span>}

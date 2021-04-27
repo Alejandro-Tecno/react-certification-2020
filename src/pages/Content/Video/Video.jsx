@@ -5,7 +5,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useAuth } from "../../../components/providers/Auth";
 import StarIcon from "@material-ui/icons/Star";
 import { useFavorites } from "../../../components/providers/Favorites";
-import{StyledVideoPage, StyledVideoContainer, StyledVideoView, StyledVideoDetails, StyledVideo } from "./Video.Styled"
+import {
+  StyledVideoPage,
+  StyledVideoContainer,
+  StyledVideoView,
+  StyledVideoDetails,
+  StyledVideo,
+} from "./Video.Styled";
+import { useTranslation } from "react-i18next";
 require("dotenv").config();
 
 function Video() {
@@ -15,7 +22,7 @@ function Video() {
   const { state, addVideo, removeVideo } = useFavorites();
   const { favorites } = state;
   const [favoriteVideo, setFavoriteVideo] = useState(false);
- 
+  const { t } = useTranslation();
   const [data, setData] = useState(null);
   const [relatedData, setRelatedData] = useState(null);
   // eslint-disable-next-line no-unused-vars
@@ -33,10 +40,12 @@ function Video() {
         .then((response) => response.json())
         .then((receivedData) => {
           setData(receivedData);
+          document.title = data.items[0].snippet.title;
         })
         .catch((error) => {
           setError(error);
         });
+      
     };
 
     const loadRelatedVideos = async () => {
@@ -84,7 +93,7 @@ function Video() {
                   className="addToFavorites"
                   onClick={() => addVideo(data.items[0])}
                 >
-                  <span>Add to favorites</span>
+                  <span>{t("addToFavorites")}</span>
                   <StarIcon />
                 </button>
               )}
@@ -93,7 +102,7 @@ function Video() {
                   className="addToFavorites"
                   onClick={() => removeVideo(data.items[0])}
                 >
-                  <span>Remove from favorites</span>
+                  <span>{t("removeFromFavorites")}</span>
                   <StarIcon />
                 </button>
               )}
@@ -103,12 +112,12 @@ function Video() {
           </StyledVideoDetails>
         </StyledVideoContainer>
       ) : (
-        "Loading"
+        t("loading")
       )}
       {relatedData && loaded ? (
         <RelatedVideos relatedData={relatedData} />
       ) : (
-        <p>Loading</p>
+        <p>{t("loading")}</p>
       )}
     </StyledVideoPage>
   );

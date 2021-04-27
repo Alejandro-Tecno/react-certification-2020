@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import Card from "../Card/";
-import styled from "styled-components";
 import useFetch from "../../../components/Hooks/useFetch";
 import UserContext from "../../../utils/UserContext";
+import {StyledCardList} from "./CardList.Styled"
 
 function CardList() {
   const { searchTerm } = useContext(UserContext);
@@ -28,14 +28,4 @@ function CardList() {
   );
 }
 
-const StyledCardList = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  justify-content: space-around;
-  padding: 1rem 2rem;
-  margin-top: 5px;
-  text-decoration: none;
-`;
 export default CardList;

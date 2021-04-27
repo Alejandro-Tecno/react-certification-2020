@@ -3,10 +3,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import styled from "styled-components";
 import UserContext from "../../../../utils/UserContext";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function SearchBar() {
   const { searchTerm, setSearchTerm } = useContext(UserContext);
   const [inputValue, setInputValue] = useState(searchTerm);
+  const { t } = useTranslation();
   let history = useHistory();
   const handleInput = (e) => {
     setInputValue(e.target.value);
@@ -28,7 +30,7 @@ function SearchBar() {
         onChange={handleInput}
       />
 
-      <button className="search-button" type="submit">
+      <button className="search-button" type="submit" title={t("search")}>
         <SearchIcon />
       </button>
     </StyledForm>

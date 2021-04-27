@@ -10,6 +10,7 @@ import GlobalStateProvider from "../providers/GlobalState/GlobalStateProvider";
 import Modal from "../Login/";
 import AuthProvider from "../providers/Auth";
 import ProtectedRoute from "./ProtectedRoute";
+import { useTranslation } from "react-i18next";
 import Favorites from "../../pages/Favorites/MainPage";
 import FavoritesProvider from "../providers/Favorites";
 import FavoriteView from "../../pages/Favorites/FavoriteView/FavoriteView";
@@ -19,6 +20,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("elmo");
   const [darkTheme, setDarkTheme] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <AuthProvider>
@@ -40,10 +42,10 @@ function App() {
                 <Modal />
                 <Switch>
                   <Route exact path="/">
-                    <Homepage title="Recommended videos" />
+                    <Homepage title={t("recommendedVideos")} />
                   </Route>
                   <Route path="/search/:searchTerm">
-                    <Homepage title="Search results"/>
+                    <Homepage title={t("searchResults")}/>
                   </Route>
                   <Route path="/video/:id">
                     <Video />

@@ -6,6 +6,7 @@ import { useAuth } from "../../../components/providers/Auth";
 import StarIcon from "@material-ui/icons/Star";
 import { useFavorites } from "../../../components/providers/Favorites";
 import {StyledVideoPage,StyledVideoView, StyledVideoDetails, StyledVideo, StyledVideoContainer} from "./FavoriteView.Styled"
+import { useTranslation } from "react-i18next";
 require("dotenv").config();
 
 function FavoriteView() {
@@ -15,12 +16,12 @@ function FavoriteView() {
   const { state, addVideo, removeVideo } = useFavorites();
   const { favorites } = state;
   const [favoriteVideo, setFavoriteVideo] = useState(false);
-  //fectch
   const [data, setData] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [loaded, setLoaded] = useState(false);
+  const { t } = useTranslation();
   const KEY = process.env.REACT_APP_API_KEY1;
   const URL = "https://www.googleapis.com/youtube/v3/";
 
@@ -68,7 +69,7 @@ function FavoriteView() {
                   className="addToFavorites"
                   onClick={() => addVideo(data.items[0])}
                 >
-                  <span>Add to favorites</span>
+                  <span>{t("addToFavorites")}</span>
                   <StarIcon />
                 </button>
               )}
@@ -77,7 +78,7 @@ function FavoriteView() {
                   className="addToFavorites"
                   onClick={() => removeVideo(data.items[0])}
                 >
-                  <span>Remove from favorites</span>
+                  <span>{t("removeFromFavorites")}</span>
                   <StarIcon />
                 </button>
               )}
@@ -87,9 +88,9 @@ function FavoriteView() {
           </StyledVideoDetails>
         </StyledVideoContainer>
       ) : (
-        "Loading"
+        t("loading")
       )}
-      {favorites ? <RelatedVideos relatedData={favorites} /> : <p>Loading</p>}
+      {favorites ? <RelatedVideos relatedData={favorites} /> : <p>{t("loading")}</p>}
     </StyledVideoPage>
   );
 }

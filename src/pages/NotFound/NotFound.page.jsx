@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { StyledNotFound } from "./NotFound.Styled";
-
+import { useTranslation } from "react-i18next";
 
 function NotFoundPage() {
+  const { t } = useTranslation();
   return (
     <StyledNotFound>
-      <h1>It seems like you are lost :(</h1>
+      <h1>{t("lost")}</h1>
       <Link to="/" className="home-link">
-        <button type="button">Get me back to Home</button>
+        <button type="button">{t("backtoHome")}</button>
       </Link>
-      <img src="404.gif" alt="page not found" />
+      <img src="404.png" alt="page not found" />
     </StyledNotFound>
   );
 }

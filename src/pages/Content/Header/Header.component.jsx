@@ -10,13 +10,22 @@ import UserContext from "../../../utils/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import Dropdown from "../../../components/Dropdown";
 import { useAuth } from "../../../components/providers/Auth";
-import {StyledHeader,StyledRigth,StyledLeft,StyledDarkModeSelector} from "./Header.styled"
+import {
+  StyledHeader,
+  StyledRigth,
+  StyledLeft,
+  StyledDarkModeSelector,
+} from "./Header.styled";
+import LanguageSelect from "./LanguageSelector/LanguageSelector";
+import { useTranslation } from "react-i18next";
+
 function Header() {
   const { setModalOpen } = useContext(UserContext);
   const { state, dispatch } = useContext(GlobalContext);
   const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0();
   const [open, setOpen] = useState(false);
   const { authenticated, internalUser, internalLogout } = useAuth();
+  const { t } = useTranslation();
 
   const handleAuth = (e) => {
     e.preventDefault();
@@ -31,7 +40,7 @@ function Header() {
       <StyledLeft>
         {(authenticated || isAuthenticated) && (
           <Link to={`/favorites`}>
-            <button title="Favorite videos" className="favorites-selector">
+            <button title={t("favoriteVideos")} className="favorites-selector">
               <StarIcon />
             </button>
           </Link>
@@ -40,7 +49,7 @@ function Header() {
           <button
             data-testid="home_selector"
             className="home-selector"
-            title="Homepage"
+            title={t("homepage")}
           >
             <HomeIcon />
           </button>
@@ -48,8 +57,9 @@ function Header() {
       </StyledLeft>
       <SearchBar />
       <StyledRigth>
+        <LanguageSelect/>
         <StyledDarkModeSelector
-          title="Set Dark mode on/off"
+          title={t("setDarkMode")}
           data-testid="darkModeButton"
           onClick={() => dispatch({ type: "TOOGLE_DARK_MODE" })}
         >
@@ -71,7 +81,7 @@ function Header() {
             isAuthenticated={isAuthenticated}
             internalLogout={internalLogout}
             logout={logout}
-             loginWithRedirect={loginWithRedirect}
+            loginWithRedirect={loginWithRedirect}
           />
         </div>
       </StyledRigth>

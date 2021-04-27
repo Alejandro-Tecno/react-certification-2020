@@ -1,14 +1,16 @@
 import React from "react";
 import RelatedCard from "../RelatedCards";
 import {StyledRelatedVideos} from "./RelatedVideos.styled"
+import { useTranslation } from "react-i18next";
 
 function RelatedVideos({ relatedData }) {
+  const { t } = useTranslation();
   const location = window.location.hash.includes("favorites");
 
 
   return (
     <StyledRelatedVideos>
-      {location ? <h2>Favorite Videos</h2> : <h2>Related videos</h2>}
+      {location ? <h2>{t("favoriteVideos")}</h2> : <h2>{t("relatedVideos")}</h2>}
       {relatedData.items ? (
         relatedData.items
           .filter((item) => item.snippet !== undefined)
@@ -35,7 +37,7 @@ function RelatedVideos({ relatedData }) {
             />
           ))
       ) : (
-        <p>Loading</p>
+        <p>{t("loading")}</p>
       )}
     </StyledRelatedVideos>
   );

@@ -1,5 +1,6 @@
 import React from "react";
-import {StyledDropdown} from "./Dropdown.styled"
+import { StyledDropdown } from "./Dropdown.styled";
+import { useTranslation } from "react-i18next";
 
 function Dropdown({
   open,
@@ -9,6 +10,7 @@ function Dropdown({
   logout,
   /* loginWithRedirect, */
 }) {
+  const { t } = useTranslation();
   return (
     <StyledDropdown>
       {open && (
@@ -20,12 +22,12 @@ function Dropdown({
           )} */}
           {isAuthenticated && (
             <button className="logout" onClick={() => logout()}>
-              Log out
+              {t("logOut")}
             </button>
           )}
           {authenticated && (
             <button className="logout" onClick={() => internalLogout()}>
-              Log out
+              {t("logOut")}
             </button>
           )}
         </>
@@ -33,6 +35,5 @@ function Dropdown({
     </StyledDropdown>
   );
 }
-
 
 export default Dropdown;
