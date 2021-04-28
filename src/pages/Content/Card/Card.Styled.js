@@ -14,6 +14,29 @@ export const StyledLink = styled(Link)`
   }
 `;
 
+export const StyledCardHolder = styled.div`
+  position: relative;
+  &:hover button {
+    display: flex !important;
+  }
+  button {
+    cursor: pointer;
+    display: none;
+    z-index: 99;
+    color: white;
+    background: #d60e0e;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    padding: 5px !important;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 20px black;
+    justify-content: space-around;
+    align-items: center;
+  }
+`;
+
 export const StyledCard = styled.div`
   display: flex;
   flex-direction: column;

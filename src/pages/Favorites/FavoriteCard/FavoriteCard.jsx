@@ -1,8 +1,10 @@
 import React from "react";
 import StarIcon from "@material-ui/icons/Star";
-import {StyledCardHolder,StyledLink,StyledCard} from "./FavoriteCard.styled"
+import {StyledCardHolder,StyledLink,StyledCard} from "./FavoriteCard.styled";
+import { useTranslation } from "react-i18next";
 
 function FavoriteCard({ id, description, image, title, removeVideo }) {
+  const { t } = useTranslation();
   return (
     <StyledCardHolder>
       <StyledLink to={`/favorites/${id}`}>
@@ -22,7 +24,7 @@ function FavoriteCard({ id, description, image, title, removeVideo }) {
         </StyledCard>
       </StyledLink>
       <button onClick={() => removeVideo()}>
-        <span>Remove</span>
+        <span>{t("remove")}</span>
         <StarIcon />
       </button>
     </StyledCardHolder>
