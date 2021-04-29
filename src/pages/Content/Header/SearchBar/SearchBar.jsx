@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-import styled from "styled-components";
 import UserContext from "../../../../utils/UserContext";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";

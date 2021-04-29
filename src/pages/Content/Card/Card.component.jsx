@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyledLink, StyledCard, StyledCardHolder } from "./Card.Styled";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "../../../components/providers/Auth";
+
 import StarIcon from "@material-ui/icons/Star";
 import { useTranslation } from "react-i18next";
 import { useFavorites } from "../../../components/providers/Favorites";
@@ -15,8 +14,6 @@ function Card({
   authenticated,
   isAuthenticated,
 }) {
-  /*  const { isAuthenticated } = useAuth0();
-  const { authenticated } = useAuth(); */
   const { t } = useTranslation();
   const { state, addVideo, removeVideo } = useFavorites();
   const { favorites } = state;
@@ -28,8 +25,9 @@ function Card({
     const HandleFavorites = favorites.find((video) => id === video.id);
     HandleFavorites ? setFavoriteVideo(true) : setFavoriteVideo(false);
   }, [favorites]);
-
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(false);
 
   const loadData = async () => {
