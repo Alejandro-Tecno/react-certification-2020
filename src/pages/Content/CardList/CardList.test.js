@@ -3,33 +3,35 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import CardList from "./CardList.page";
+import { useTranslation } from "react-i18next";
+import FavoritesProvider from "../../../components/providers/Favorites";
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key) => key }),
+}));
 
 describe("Cardlist", () => {
   describe("CardList is rendered", () => {
     test("renders CardList component", () => {
-      render(<CardList />);
+      const MockSearchTerm = "elmo";
+      render(
+        <FavoritesProvider>
+          <CardList searchTerm={MockSearchTerm} />
+        </FavoritesProvider>
+      );
+      expect(screen.getByTestId("content_div")).toBeInTheDocument();
+      screen.debug();
     });
   });
-  describe("Contents", () => {
+  /*  describe("Contents", () => {
     const props = {
       id: "testId",
       title: "testTitle",
       description: "testDescription",
     };
+  }); */
 
-    /* it("Renders the cards correctly", () => {
-      // Initializes variables
-      render(<CardList {...props} />);
-      expect(screen.getByTestId("video_description").toBe("p"));
-    }); */
-
-    /*   it("Renders the complete list of videos",  () => {
-      render(<CardList />);
-      expect(screen.getAllByRole("img").length).toBe(5);
-    }); */
-  });
-
-  describe("The mock is correct", () => {
+  /*   describe("The mock is correct", () => {
     it("The contents of the array are the correct ones", () => {
       // Initializes variables
       const firstVideoId = Mock.items[1];
@@ -79,5 +81,5 @@ describe("Cardlist", () => {
         expect(imageUrls[i]).toContain("https" && ".jpg");
       }
     });
-  });
+  }); */
 });

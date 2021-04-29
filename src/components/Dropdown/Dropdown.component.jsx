@@ -11,6 +11,7 @@ function Dropdown({
   /* loginWithRedirect, */
 }) {
   const { t } = useTranslation();
+
   return (
     <StyledDropdown>
       {open && (

@@ -35,6 +35,12 @@ export const StyledCardHolder = styled.div`
     justify-content: space-around;
     align-items: center;
   }
+  .add{
+    background: #48ad48;
+    &:hover{
+      background: #3bc03b;
+    }
+  }
 `;
 
 export const StyledCard = styled.div`

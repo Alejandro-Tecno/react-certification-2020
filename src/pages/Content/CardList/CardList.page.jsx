@@ -4,11 +4,15 @@ import useFetch from "../../../components/Hooks/useFetch";
 import UserContext from "../../../utils/UserContext";
 import { StyledCardList } from "./CardList.Styled";
 import { useFavorites } from "../../../components/providers/Favorites";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../../components/providers/Auth";
 
 function CardList() {
   const { searchTerm } = useContext(UserContext);
   const data = useFetch(searchTerm);
   const { addVideo, removeVideo } = useFavorites();
+  const { isAuthenticated } = useAuth0();
+  const { authenticated } = useAuth();
 
   return (
     <StyledCardList data-testid="content_div">
@@ -23,9 +27,9 @@ function CardList() {
                 id={video.id.videoId}
                 title={video.snippet.title}
                 description={video.snippet.description}
-                removeVideo={() => removeVideo(video)}
-                addVideo={addVideo}
                 video={video}
+                isAuthenticated={isAuthenticated}
+                authenticated={authenticated}
               />
             ))
         : null}

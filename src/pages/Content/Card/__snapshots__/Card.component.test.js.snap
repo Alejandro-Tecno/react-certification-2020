@@ -1,40 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Card creator Renders correctly 1`] = `
-<a
-  className="sc-bdfBwQ czeCVk"
-  href="/video/undefined"
-  onClick={[Function]}
+<div
+  className="sc-gsTCUz eCoRHq"
 >
-  <div
-    className="sc-gsTCUz jOrZXk"
-    data-testid="card_div"
+  <a
+    className="sc-bdfBwQ czeCVk"
+    href="/video/undefined"
+    onClick={[Function]}
   >
     <div
-      className="video-image"
-      data-testid="video-image"
+      className="sc-dlfnbm gBDEMW"
+      data-testid="card_div"
     >
-      <img
-        alt=""
-        data-testid="card_img"
-        src="https://i.ytimg.com/vi/zClI9OjgKXM/hqdefault.jpg"
-      />
-    </div>
-    <div
-      className="video-content"
-    >
-      <h2
-        data-testid="card_h2"
+      <div
+        className="video-image"
+        data-testid="video-image"
       >
-        Video'1
-        ;
-      </h2>
-      <p
-        data-testid="video_description"
+        <img
+          alt=""
+          data-testid="card_img"
+          src="https://i.ytimg.com/vi/zClI9OjgKXM/hqdefault.jpg"
+        />
+      </div>
+      <div
+        className="video-content"
       >
-        testDescription
-      </p>
+        <h2
+          data-testid="card_h2"
+        >
+          Video'1
+          ;
+        </h2>
+        <p
+          data-testid="video_description"
+        >
+          testDescription
+        </p>
+      </div>
     </div>
-  </div>
-</a>
+  </a>
+</div>
 `;

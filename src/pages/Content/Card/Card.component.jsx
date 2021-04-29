@@ -6,38 +6,48 @@ import StarIcon from "@material-ui/icons/Star";
 import { useTranslation } from "react-i18next";
 import { useFavorites } from "../../../components/providers/Favorites";
 
-function Card({ image, title, description, id, removeVideo, video }) {
-  const { isAuthenticated } = useAuth0();
-  const { authenticated } = useAuth();
+function Card({
+  image,
+  title,
+  description,
+  id,
+  video,
+  authenticated,
+  isAuthenticated,
+}) {
+  /*  const { isAuthenticated } = useAuth0();
+  const { authenticated } = useAuth(); */
   const { t } = useTranslation();
-  const { state, addVideo } = useFavorites();
+  const { state, addVideo, removeVideo } = useFavorites();
   const { favorites } = state;
   const [favoriteVideo, setFavoriteVideo] = useState(false);
   const KEY = process.env.REACT_APP_API_KEY1;
   const URL = "https://www.googleapis.com/youtube/v3/";
 
-  /* useEffect(() => {
+  useEffect(() => {
     const HandleFavorites = favorites.find((video) => id === video.id);
     HandleFavorites ? setFavoriteVideo(true) : setFavoriteVideo(false);
-  }, []); */
+  }, [favorites]);
 
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
+
   const loadData = async () => {
     await fetch(`${URL}videos?part=id%2C+snippet&id=${id}&key=${KEY}`)
       .then((response) => response.json())
       .then((receivedData) => {
         setData(receivedData);
-        handleAddVideo();
+        addVideo(receivedData.items[0]);
       })
       .catch((error) => {
         setError(error);
       });
   };
 
-  const handleAddVideo = () => {
-    console.log(data.items[0]);
-    addVideo(data.items[0])
+  const handleRemove = (deletedVideo) => {
+    const deletedVideoId = { id: null };
+    deletedVideoId.id = deletedVideo.id.videoId;
+    removeVideo(deletedVideoId);
   };
 
   return (
@@ -59,21 +69,17 @@ function Card({ image, title, description, id, removeVideo, video }) {
           </div>
         </StyledCard>
       </StyledLink>
-      {(authenticated || isAuthenticated) & favoriteVideo && (
-        <>
-          <button onClick={removeVideo}>
-            <span>{t("remove")}</span>
-            <StarIcon />
-          </button>
-        </>
+      {Boolean((authenticated || isAuthenticated) & favoriteVideo) && (
+        <button className="remove" onClick={() => handleRemove(video)}>
+          <span>{t("remove")}</span>
+          <StarIcon />
+        </button>
       )}
-      {(authenticated || isAuthenticated) & !favoriteVideo && (
-        <>
-          <button onClick={() => loadData()}>
-            <span>{t("add")}</span>
-            <StarIcon />
-          </button>
-        </>
+      {Boolean((authenticated || isAuthenticated) & !favoriteVideo) && (
+        <button className="add" onClick={() => loadData()}>
+          <span>{t("add")}</span>
+          <StarIcon />
+        </button>
       )}
     </StyledCardHolder>
   );

@@ -40,12 +40,12 @@ function Video() {
         .then((response) => response.json())
         .then((receivedData) => {
           setData(receivedData);
-          document.title = data.items[0].snippet.title;
+          document.title = receivedData.items[0].snippet.title;
+          console.log(receivedData.items[0]);
         })
         .catch((error) => {
           setError(error);
         });
-      
     };
 
     const loadRelatedVideos = async () => {

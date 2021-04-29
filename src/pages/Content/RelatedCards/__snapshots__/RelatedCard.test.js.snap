@@ -7,14 +7,14 @@ exports[`RelatedCard creator Renders correctly 1`] = `
   onClick={[Function]}
 >
   <div
-    className="sc-gsTCUz gcVeHO"
+    className="sc-gsTCUz lipwJB"
     data-testid="Relatedcard_div"
   >
     <div
       className="video-image"
     >
       <img
-        alt=""
+        alt="title"
         data-testid="card_img"
         src="https://test-image.jpg"
       />
