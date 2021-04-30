@@ -1,0 +1,28 @@
+{
+    "select_language": "Select languaje",
+    "search": "Search",
+    "favorites": "Favorites",
+    "homepage": "Homepage",
+    "favoriteVideos": "Favorite Videos",
+    "relatedVideos": "Related videos",
+    "loading": "Loading",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "remove": "Remove",
+    "add": "Add",
+    "noFavoriteVideos": "No favorite videos",
+    "lost": "It seems like you are lost :(",
+    "backtoHome": "Get me back to Home",
+    "recommendedVideos": "Recommended videos",
+    "logOut": "Log out",
+    "logIn": "Log in",
+    "searchResults": "Search results",
+    "username": "Username",
+    "password": "Password",
+    "signInGoogle": "Sign in with Google",
+    "or" : "or",
+    "setDarkMode" :"Set Dark mode on/off"
+  }
+
+ 
+  

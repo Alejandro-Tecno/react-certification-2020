@@ -1,41 +1,38 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../../utils/GlobalStateProvider";
+import { GlobalContext } from "../providers/GlobalState/GlobalStateProvider";
 import { Themes } from "../../utils/themes";
 
 function Layout({ children }) {
-  const { state } = useContext(ThemeContext);
+  const { state } = useContext(GlobalContext);
 
-  const StyledContainer = styled.main`
-    width: 100vw;
-    color: ${state.isDark ? Themes.dark.font : Themes.ligth.font};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: ${state.isDark
-      ? Themes.dark.background
-      : Themes.ligth.background};
-    overflow: scroll;
-    button {
-      all: initial;
-      all: unset;
-      background: none;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    a,
-    p,
-    h3,
-    h2,
-    h1,
-    h4 {
-      text-decoration: none;
-      color: ${state.isDark ? Themes.dark.font : Themes.ligth.font};
-    }
-  `;
-
-  return <StyledContainer>{children}</StyledContainer>;
+   return <StyledContainer isDark={state.isDark}>{children}</StyledContainer>;
 }
+
+const StyledContainer = styled.main`
+  color: ${(props) => (props.isDark ? Themes.dark.font : Themes.ligth.font)};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: ${(props) =>
+    props.isDark ? Themes.dark.background : Themes.ligth.background};
+
+  a,
+  p,
+  h3,
+  h2,
+  h1,
+  h4 {
+    text-decoration: none;
+    color: ${(props) => (props.isDark ? Themes.dark.font : Themes.ligth.font)};
+  }
+
+  button{
+    -webkit-appearance: none;
+    padding: 1px;
+    cursor: pointer;
+  }
+`;
 
 export default Layout;

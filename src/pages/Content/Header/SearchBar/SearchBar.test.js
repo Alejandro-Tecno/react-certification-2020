@@ -6,7 +6,6 @@ import { useHistory, BrowserRouter } from "react-router-dom";
 import { Router, withRouter, useRouteMatch } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import UserContext from "../../../../utils/UserContext";
-import { handleSubmit } from "./";
 
 describe("Header", () => {
   const contextValue = "elmo";

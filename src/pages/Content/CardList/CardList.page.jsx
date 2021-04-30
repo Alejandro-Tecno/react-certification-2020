@@ -1,12 +1,17 @@
 import React, { useContext } from "react";
 import Card from "../Card/";
-import styled from "styled-components";
 import useFetch from "../../../components/Hooks/useFetch";
 import UserContext from "../../../utils/UserContext";
+import { StyledCardList } from "./CardList.Styled";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../../components/providers/Auth";
 
 function CardList() {
   const { searchTerm } = useContext(UserContext);
   const data = useFetch(searchTerm);
+
+  const { isAuthenticated } = useAuth0();
+  const { authenticated } = useAuth();
 
   return (
     <StyledCardList data-testid="content_div">
@@ -21,6 +26,9 @@ function CardList() {
                 id={video.id.videoId}
                 title={video.snippet.title}
                 description={video.snippet.description}
+                video={video}
+                isAuthenticated={isAuthenticated}
+                authenticated={authenticated}
               />
             ))
         : null}
@@ -28,14 +36,4 @@ function CardList() {
   );
 }
 
-const StyledCardList = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: 90vh;
-  justify-content: space-around;
-  padding: 1rem 2rem;
-  margin-top: 5px;
-  text-decoration: none;
-`;
 export default CardList;

@@ -1,46 +1,70 @@
 import React, { useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import Layout from "../Layout";
 import NotFound from "../../pages/NotFound";
 import Homepage from "../../pages/Homepage";
 import Header from "../../pages/Content/Header";
-import SearchPage from "../../pages/SearchPage";
 import UserContext from "../../utils/UserContext";
 import Video from "../../pages/Content/Video";
-import GlobalStateProvider from "../../utils/GlobalStateProvider";
-
+import GlobalStateProvider from "../providers/GlobalState/GlobalStateProvider";
+import Modal from "../Login/";
+import AuthProvider from "../providers/Auth";
+import ProtectedRoute from "./ProtectedRoute";
+import { useTranslation } from "react-i18next";
+import Favorites from "../../pages/Favorites/MainPage";
+import FavoritesProvider from "../providers/Favorites";
+import FavoriteView from "../../pages/Favorites/FavoriteView/FavoriteView";
 require("dotenv").config();
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("elmo");
   const [darkTheme, setDarkTheme] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
-    <BrowserRouter>
-      <GlobalStateProvider>
-        <Layout>
-          <UserContext.Provider
-            value={{ searchTerm, setSearchTerm, darkTheme, setDarkTheme }}
-          >
-            <Header />
-            <Switch>
-              <Route exact path="/">
-                <Homepage />
-              </Route>
-              <Route path="/search/:searchTerm">
-                <SearchPage />
-              </Route>
-              <Route path="/video/:id">
-                <Video />
-              </Route>
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </UserContext.Provider>
-        </Layout>
-      </GlobalStateProvider>
-    </BrowserRouter>
+    <AuthProvider>
+      <FavoritesProvider>
+        <HashRouter>
+          <GlobalStateProvider>
+            <Layout>
+              <UserContext.Provider
+                value={{
+                  searchTerm,
+                  setSearchTerm,
+                  darkTheme,
+                  setDarkTheme,
+                  modalOpen,
+                  setModalOpen,
+                }}
+              >
+                <Header />
+                <Modal />
+                <Switch>
+                  <Route exact path="/">
+                    <Homepage title={t("recommendedVideos")} />
+                  </Route>
+                  <Route path="/search/:searchTerm">
+                    <Homepage title={t("searchResults")}/>
+                  </Route>
+                  <Route path="/video/:id">
+                    <Video />
+                  </Route>
+                  <ProtectedRoute
+                    path="/favorites/:id"
+                    component={FavoriteView}
+                  />
+                  <ProtectedRoute path="/favorites" component={Favorites} />
+                  <Route path="*">
+                    <NotFound />
+                  </Route>
+                </Switch>
+              </UserContext.Provider>
+            </Layout>
+          </GlobalStateProvider>
+        </HashRouter>
+      </FavoritesProvider>
+    </AuthProvider>
   );
 }
 

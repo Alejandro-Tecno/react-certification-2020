@@ -3,6 +3,12 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { BrowserRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key) => key }),
+}));
+
 const relatedData = {
   kind: "youtube#searchListResponse",
   etag: "sULQw4Z-fz8TGJxOJalMJgeCW-Y",
@@ -160,6 +166,6 @@ describe("Video", () => {
 
   it("contains the Related videos text", () => {
     const h2 = screen.getByRole("heading");
-    expect(h2).toHaveTextContent("Related videos");
+    expect(h2).toHaveTextContent("relatedVideos");
   });
 });

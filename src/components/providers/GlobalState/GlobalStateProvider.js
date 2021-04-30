@@ -1,8 +1,11 @@
 import React from "react";
 import { createContext, useReducer } from "react";
 
-export const ThemeContext = createContext({
+export const GlobalContext = createContext({
   isDark: false,
+  favoriteVideos: [],
+  addFavoriteVideo: () => {},
+  removeFavoriteVideo: () => {},
 });
 
 const reducer = (state, action) => {
@@ -11,6 +14,7 @@ const reducer = (state, action) => {
       return {
         isDark: !state.isDark,
       };
+
     default: {
       return state;
     }
@@ -23,9 +27,9 @@ const GlobalStateProvider = ({ children }) => {
   });
 
   return (
-    <ThemeContext.Provider value={{ state, dispatch }}>
+    <GlobalContext.Provider value={{ state, dispatch }}>
       {children}
-    </ThemeContext.Provider>
+    </GlobalContext.Provider>
   );
 };
 

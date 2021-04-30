@@ -1,93 +1,86 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { StyledLink, StyledCard, StyledCardHolder } from "./Card.Styled";
 
-function Card({ image, title, description, id }) {
+import StarIcon from "@material-ui/icons/Star";
+import { useTranslation } from "react-i18next";
+import { useFavorites } from "../../../components/providers/Favorites";
+
+function Card({
+  image,
+  title,
+  description,
+  id,
+  video,
+  authenticated,
+  isAuthenticated,
+}) {
+  const { t } = useTranslation();
+  const { state, addVideo, removeVideo } = useFavorites();
+  const { favorites } = state;
+  const [favoriteVideo, setFavoriteVideo] = useState(false);
+  const KEY = process.env.REACT_APP_API_KEY1;
+  const URL = "https://www.googleapis.com/youtube/v3/";
+
+  useEffect(() => {
+    const HandleFavorites = favorites.find((video) => id === video.id);
+    HandleFavorites ? setFavoriteVideo(true) : setFavoriteVideo(false);
+  }, [favorites]);
+  // eslint-disable-next-line no-unused-vars
+  const [data, setData] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [error, setError] = useState(false);
+
+  const loadData = async () => {
+    await fetch(`${URL}videos?part=id%2C+snippet&id=${id}&key=${KEY}`)
+      .then((response) => response.json())
+      .then((receivedData) => {
+        setData(receivedData);
+        addVideo(receivedData.items[0]);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
+
+  const handleRemove = (deletedVideo) => {
+    const deletedVideoId = { id: null };
+    deletedVideoId.id = deletedVideo.id.videoId;
+    removeVideo(deletedVideoId);
+  };
+
   return (
-    <StyledLink to={`/video/${id}`}>
-      <StyledCard data-testid="card_div">
-        <div className="video-image" data-testid="video-image">
-          <img data-testid="card_img" src={image} alt="" />
-        </div>
-        <div className="video-content">
-          <h2 data-testid="card_h2">
-            {title.replace(/&#39;/, "'").replace(/&amp;/, "&")}
-          </h2>
-          <p data-testid="video_description">{description}</p>
-        </div>
-      </StyledCard>
-    </StyledLink>
+    <StyledCardHolder>
+      <StyledLink to={`/video/${id}`}>
+        <StyledCard data-testid="card_div">
+          <div className="video-image" data-testid="video-image">
+            <img data-testid="card_img" src={image} alt="" />
+          </div>
+          <div className="video-content">
+            <h2 data-testid="card_h2">
+              {title
+                .replace(/&#39;/g, "'")
+                .replace(/&quot;/g, "'")
+                .replace(/&amp;/g, "&")}
+              ;
+            </h2>
+            <p data-testid="video_description">{description}</p>
+          </div>
+        </StyledCard>
+      </StyledLink>
+      {Boolean((authenticated || isAuthenticated) & favoriteVideo) && (
+        <button className="remove" onClick={() => handleRemove(video)}>
+          <span>{t("remove")}</span>
+          <StarIcon />
+        </button>
+      )}
+      {Boolean((authenticated || isAuthenticated) & !favoriteVideo) && (
+        <button className="add" onClick={() => loadData()}>
+          <span>{t("add")}</span>
+          <StarIcon />
+        </button>
+      )}
+    </StyledCardHolder>
   );
 }
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-`;
-
-const StyledCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  align-items: center;
-  /* background: #ffffff; */
-  position: relative;
-  border: 1px solid #3a3a53;
-  border-radius: 5px;
-  margin: 10px 10px;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  /* box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.016),
-    -12px -12px 24px 0 rgba(255, 255, 255, 0.1); */
-  &:hover {
-    transform: scale(1.02);
-    /* box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.116),
-      -12px -12px 24px 0 rgba(255, 255, 255, 0.5); */
-  }
-
-  .video-image {
-    height: 190px;
-    width: 350px;
-    border-radius: 5px 5px 0px 0px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 5px 5px 0px 0px;
-    }
-  }
-  .video-content {
-    padding: 0rem 1rem;
-    height: 150px;
-    h2 {
-      font-size: 1.2rem;
-      text-decoration: none;
-      /* color: black; */
-      overflow: hidden;
-      text-overflow: ellipsis;
-      height: 3rem;
-    }
-    p {
-      font-size: 0.8rem;
-      /* color: #403d4e; */
-      text-decoration: none;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-`;
 
 export default Card;

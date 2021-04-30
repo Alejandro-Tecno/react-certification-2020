@@ -5,6 +5,11 @@ const UserContext = createContext({
   setSearchTerm: () => {},
   darkTheme: false,
   setDarkTheme: () => {},
+  modalOpen: false,
+  setModalOpen: () => {},
+  favoriteVideos: [],
+  addFavoriteVideo: () => {},
+  removeFavoriteVideo: () => {},
 });
 
 export default UserContext;
